@@ -16,77 +16,92 @@ export default class IklanFasilitas extends Component {
         {
           id: 1,
           nama: "AC",
-          status: false
+          status: false,
+          code: "weather-windy"
         },
         {
           id: 2,
           nama: "Kasur",
-          status: false
+          status: false,
+          code: "bed-empty"
         },
         {
           id: 3,
           nama: "Kamar Mandi Dalam",
-          status: false
+          status: false,
+          code: "water"
         },
         {
           id: 4,
           nama: "Wifi",
-          status: false
+          status: false,
+          code: "wifi"
         },
         {
           id: 5,
           nama: "Dapur",
-          status: false
+          status: false,
+          code: "food-variant"
         },
         {
           id: 6,
-          nama: "Parkiran",
-          status: false
+          nama: "Kandang Hewan",
+          status: false,
+          code: "dog-side"
         },
         {
           id: 7,
           nama: "TV",
-          status: false
+          status: false,
+          code: "television"
         },
         {
           id: 8,
           nama: "Almari Pakaian",
-          status: false
+          status: false,
+          code: "treasure-chest"
         },
         {
           id: 9,
           nama: "Internet",
-          status: false
+          status: false,
+          code: "web"
         },
         {
           id: 10,
           nama: "Parkir Mobil",
-          status: false
+          status: false,
+          code: "car"
         },
         {
           id: 11,
           nama: "Parkir Motor",
-          status: false
+          status: false,
+          code: "motorbike"
         },
         {
           id: 12,
           nama: "Kamar Kosongan",
-          status: false
+          status: false,
+          code: "home-floor-0"
         },
         {
           id: 13,
           nama: "Security",
-          status: false
+          status: false,
+          code: "alarm-light"
         },
         {
           id: 14,
           nama: "Sekamar Berdua",
-          status: false
+          status: false,
+          code: "human-male-female"
         },
         {
           id: 15,
           nama: "Pembantu",
-          status: false
+          status: false,
+          code: "human-handsup"
         }
       ]
     };

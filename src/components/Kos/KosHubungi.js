@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     width: 80,
-    textAlign: "center"
+    textAlign: "center",
+    color: "#2980b9"
   },
   btnBooking: {
     padding: 5,

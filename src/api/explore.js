@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_HOST = "http://192.168.0.17:5000";
+const API_HOST = "https://rantauka.herokuapp.com";
+
+export const BASE_URL = "https://rantauka.herokuapp.com";
 
 export const signupAccount = async data => {
   const response = await axios({
