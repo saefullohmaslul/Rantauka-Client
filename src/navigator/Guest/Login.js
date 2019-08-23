@@ -5,7 +5,10 @@ import { primaryColor } from "../../api/constans";
 const LoginNavigator = createStackNavigator(
   {
     Index: {
-      screen: AuthIndex
+      screen: AuthIndex,
+      navigationOptions: {
+        header: null
+      }
     },
     Login: {
       screen: Login
