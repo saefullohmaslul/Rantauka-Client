@@ -12,7 +12,7 @@ import Modal from "react-native-modal";
 import KosItem from "../../components/Kos/KosItem";
 import { FlatList } from "react-native-gesture-handler";
 import SearchInput from "../../components/Search/SearchInput";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 import { getAllKostList } from "../../api/explore";
 
 const ModalComponent = props => (
@@ -152,7 +152,7 @@ class KosList extends Component {
         />
         <View style={styles.filterUrutkan}>
           <Icon
-            style={[styles.iconFilter, { color: btnColor }]}
+            style={[styles.iconFilter, { color: primaryColor }]}
             name="filter-variant"
             size={15}
           />
@@ -168,7 +168,7 @@ class KosList extends Component {
           />
 
           <Icon
-            style={[styles.iconUrutkan, { color: btnColor }]}
+            style={[styles.iconUrutkan, { color: primaryColor }]}
             name="sort-variant"
             size={15}
           />

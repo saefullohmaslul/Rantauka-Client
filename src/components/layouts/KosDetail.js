@@ -17,7 +17,7 @@ import axios from "axios";
 
 import KosHubungi from "../../components/Kos/KosHubungi";
 import KosComponent from "../../components/Kos/KosDetail";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 import { getKostById } from "../../api/explore";
 
 class KosDetail extends Component {
@@ -52,7 +52,7 @@ class KosDetail extends Component {
     this.props.navigation.setParams({
       bgColor: this.scrollY.interpolate({
         inputRange: [0, Dimensions.get("window").height / 2 - 40],
-        outputRange: ["transparent", btnColor],
+        outputRange: ["transparent", primaryColor],
         extrapolate: "clamp"
       })
     });

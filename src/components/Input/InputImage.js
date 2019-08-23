@@ -11,7 +11,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ImagePicker from "react-native-image-crop-picker";
 
 import ImageSlider from "../../components/Iklan/ImageSlider";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 // create a component
 class InputImage extends Component {
@@ -40,7 +40,7 @@ class InputImage extends Component {
             <Icon
               name={icon}
               size={80}
-              style={{ color: btnColor, marginBottom: 10 }}
+              style={{ color: primaryColor, marginBottom: 10 }}
             />
           </TouchableOpacity>
         </ScrollView>

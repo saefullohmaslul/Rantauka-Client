@@ -2,9 +2,9 @@ import React from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { Provider as PaperProvider } from "react-native-paper";
 
-import Root from "./Root";
-import Profile from "./Profile";
-import { theme } from "../../constant";
+import Root from "./AuthRoot";
+import Profile from "../layouts/Profile";
+import { theme } from "../../api/constans";
 import { loginAccount } from "../../api/explore";
 
 class Main extends React.Component {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Checkbox } from "react-native-paper";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 class Filter extends Component {
   render() {
@@ -12,7 +12,7 @@ class Filter extends Component {
           <Checkbox
             onPress={() => this.props.handleFasilitas(this.props.fasilitas.id)}
             status={status}
-            color={btnColor}
+            color={primaryColor}
           />
           <Text>{title}</Text>
         </View>

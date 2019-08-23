@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { Button } from "react-native-paper";
 
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 export default class Calenders extends Component {
   constructor(props) {
@@ -32,9 +32,9 @@ export default class Calenders extends Component {
           hideExtraDays
           markedDates={{ [this.state.selected]: { selected: true } }}
           theme={{
-            selectedDayBackgroundColor: btnColor,
-            todayTextColor: btnColor,
-            arrowColor: btnColor
+            selectedDayBackgroundColor: primaryColor,
+            todayTextColor: primaryColor,
+            arrowColor: primaryColor
           }}
         />
         <Button
@@ -55,7 +55,7 @@ export default class Calenders extends Component {
 
 const style = StyleSheet.create({
   button: {
-    backgroundColor: btnColor,
+    backgroundColor: primaryColor,
     marginHorizontal: 10
   }
 });

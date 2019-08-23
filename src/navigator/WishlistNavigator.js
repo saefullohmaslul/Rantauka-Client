@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
 
-import Wishlist from "../screens/Whitelist/Wishlist";
+import Wishlist from "../components/layouts/Wishlist";
 
 const WishlistNavigator = createStackNavigator(
   {

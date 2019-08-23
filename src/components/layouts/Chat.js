@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
-import Message from "../../components/Message/Message";
+import Message from "../Message/Message";
 
 class Chat extends Component {
   constructor() {

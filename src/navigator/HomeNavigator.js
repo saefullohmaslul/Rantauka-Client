@@ -2,17 +2,17 @@ import React from "react";
 import { createStackNavigator } from "react-navigation";
 import { TextInput } from "react-native";
 
-import Home from "../screens/Home/index";
-import Kos from "../screens/Kos/KosList";
-import KosDetail from "../screens/Kos/KosDetail";
-import Login from "../screens/Auth/Login";
-import Iklan from "../screens/Iklan/Iklan";
-import Filter from "../screens/Filter/Filter";
-import Urutkan from "../screens/Urutkan/Urutkan";
-import Booking from "../screens/Booking/Booking";
-import BookingCalender from "../screens/Booking/BookingCalender";
-import BookingList from "../screens/Booking/BookingList";
-import BookingDuration from "../screens/Booking/BookingDuration";
+import Home from "../components/layouts/Explore";
+import Kos from "../components/layouts/KosList";
+import KosDetail from "../components/layouts/KosDetail";
+import Login from "../components/layouts/Login";
+import Iklan from "../components/layouts/Iklan";
+import Filter from "../components/layouts/Filter";
+import Urutkan from "../components/layouts/Urutkan";
+import Booking from "../components/layouts/Booking";
+import BookingCalender from "../components/Booking/BookingCalender";
+import BookingList from "../components/layouts/BookingList";
+import BookingDuration from "../components/Booking/BookingDuration";
 
 const KosList = createStackNavigator(
   {

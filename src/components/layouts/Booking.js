@@ -7,9 +7,9 @@ import {
   Image,
   ScrollView
 } from "react-native";
-import { Appbar, Button, Checkbox } from "react-native-paper";
+import { Button, Checkbox } from "react-native-paper";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 export default class Booking extends Component {
   state = {
@@ -154,7 +154,7 @@ export default class Booking extends Component {
                 }}
               >
                 <Checkbox
-                  color={btnColor}
+                  color={primaryColor}
                   status={checked ? "checked" : "unchecked"}
                   onPress={() => {
                     this.setState({ checked: !checked });
@@ -167,7 +167,7 @@ export default class Booking extends Component {
               </View>
               <View style={{ marginBottom: 5 }}>
                 <Button
-                  color={btnColor}
+                  color={primaryColor}
                   disabled={!isEnable}
                   mode="contained"
                   onPress={() => {

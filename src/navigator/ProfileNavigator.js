@@ -1,11 +1,11 @@
 import { createStackNavigator } from "react-navigation";
 
-import Root from "../screens/Auth/index";
-import Login from "../screens/Auth/Login";
-import Register from "../screens/Auth/Register";
-import Profile from "../screens/Auth/Profile";
-import BookingList from "../screens/Booking/BookingList";
-import Setting from "../screens/Auth/Profile/Setting";
+import Root from "../components/layouts/AuthIndex";
+import Login from "../components/layouts/Login";
+import Register from "../components/layouts/Register";
+import Profile from "../components/layouts/Profile";
+import BookingList from "../components/layouts/BookingList";
+import Setting from "../components/layouts/Setting";
 
 const ProfileNavigator = createStackNavigator(
   {

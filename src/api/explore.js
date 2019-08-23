@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_HOST = "http://192.168.0.17:5000";
+const API_HOST = "http://192.168.1.28:5000";
 
 export const signupAccount = async data => {
   const response = await axios({

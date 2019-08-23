@@ -6,7 +6,7 @@ import ProfileNavigator from "./src/navigator/ProfileNavigator";
 import HomeNavigator from "./src/navigator/HomeNavigator";
 import ChatNavigator from "./src/navigator/ChatNavigator";
 import WishlistNavigator from "./src/navigator/WishlistNavigator";
-import { btnColor } from "./src/constant";
+import { primaryColor } from "./src/api/constans";
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -53,7 +53,7 @@ const TabNavigator = createBottomTabNavigator(
       headerTintColor: "#2980b9"
     },
     tabBarOptions: {
-      activeTintColor: btnColor,
+      activeTintColor: primaryColor,
       inactiveTintColor: "grey"
     }
   }

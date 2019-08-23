@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import SearchComponent from "../../components/Search/Search";
-import PromoComponent from "../../components/Promo/Promo";
-import PasangIklan from "../../components/Iklan/PasangIklan";
-import KotaPopuler from "../../components/KotaPopuler/KotaPopuler";
-import KosList from "../../screens/Kos/KosList";
+import SearchComponent from "../Search/Search";
+import PromoComponent from "../Promo/Promo";
+import PasangIklan from "../Iklan/PasangIklan";
+import KotaPopuler from "../KotaPopuler/KotaPopuler";
 
 class Home extends Component {
   constructor() {

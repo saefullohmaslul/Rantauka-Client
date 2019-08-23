@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { Provider as PaperProvider } from "react-native-paper";
 
-import { theme, btnColor } from "../../constant";
+import { theme, primaryColor } from "../../api/constans";
 
 class LoginPemilik extends Component {
   handleIklan = async () => {
@@ -37,7 +37,7 @@ class LoginPemilik extends Component {
             <Text style={styles.text}>Tertarik mengiklankan kosmu?</Text>
           </View>
           <TouchableOpacity onPress={this.handleIklan}>
-            <View style={[styles.button, { backgroundColor: btnColor }]}>
+            <View style={[styles.button, { backgroundColor: primaryColor }]}>
               <Text style={styles.link}>Pasang Iklan</Text>
             </View>
           </TouchableOpacity>
