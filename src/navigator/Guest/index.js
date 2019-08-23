@@ -5,29 +5,27 @@ import {
   Register,
   KosList,
   KosDetail,
-  AuthIndex
+  AuthIndex,
+  AuthRoot
 } from "../../components/layouts";
 import MenuNavigator from "./Menu";
+import { primaryColor } from "../../api/constans";
 
-const GuestNavigator = createStackNavigator({
-  Menu: {
-    screen: MenuNavigator
+const GuestNavigator = createStackNavigator(
+  {
+    Menu: {
+      screen: MenuNavigator
+    },
+    AuthIndex: {
+      screen: AuthIndex
+    }
   },
-  Login: {
-    screen: Login
-  },
-  Register: {
-    screen: Register
-  },
-  HomeList: {
-    screen: KosList
-  },
-  HomeDetail: {
-    screen: KosDetail
-  },
-  AuthIndex: {
-    screen: AuthIndex
+  {
+    defaultNavigationOptions: {
+      header: null,
+      headerTintColor: primaryColor
+    }
   }
-});
+);
 
 export default GuestNavigator;

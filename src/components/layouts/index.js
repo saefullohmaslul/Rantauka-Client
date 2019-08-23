@@ -15,3 +15,5 @@ export { default as KosList } from "./KosList";
 export { default as Setting } from "./Setting";
 export { default as Urutkan } from "./Urutkan";
 export { default as Wishlist } from "./Wishlist";
+export { default as BookingCalender } from "./BookingCalender";
+export { default as BookingDuration } from "./BookingDuration";

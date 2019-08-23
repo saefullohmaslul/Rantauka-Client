@@ -113,7 +113,7 @@ class KosList extends Component {
   };
 
   handleGoBack = () => {
-    this.props.navigation.navigate("Home");
+    this.props.navigation.navigate("Index");
   };
 
   render() {
@@ -135,7 +135,7 @@ class KosList extends Component {
           renderItem={({ item, index }) => (
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate("KosDetail", {
+                this.props.navigation.navigate("HomeDetail", {
                   kostList: item.id
                 })
               }

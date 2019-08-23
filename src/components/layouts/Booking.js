@@ -172,7 +172,7 @@ export default class Booking extends Component {
                   mode="contained"
                   onPress={() => {
                     this.props.navigation.navigate("BookingList", {
-                      handleBack: () => this.props.navigation.navigate("Home")
+                      handleBack: () => this.props.navigation.navigate("Index")
                     });
                   }}
                 >

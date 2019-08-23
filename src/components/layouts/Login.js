@@ -34,7 +34,7 @@ class Login extends Component {
         await AsyncStorage.setItem("@isLogin", "true");
         await AsyncStorage.setItem("@token", response.data.token);
         handleAuth(true);
-        this.props.navigation.navigate("Root");
+        this.props.navigation.navigate("Logged");
       }
     } catch (err) {
       console.log(err);

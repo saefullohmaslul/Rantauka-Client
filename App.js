@@ -7,56 +7,57 @@ import HomeNavigator from "./src/navigator/HomeNavigator";
 import ChatNavigator from "./src/navigator/ChatNavigator";
 import WishlistNavigator from "./src/navigator/WishlistNavigator";
 import { primaryColor } from "./src/api/constans";
+import AppNavigator from "./src/navigator";
 
-const TabNavigator = createBottomTabNavigator(
-  {
-    Home: {
-      screen: HomeNavigator,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="home-outline" color={tintColor} size={25} />
-        )
-      }
-    },
-    Wishlist: {
-      screen: WishlistNavigator,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="heart-outline" color={tintColor} size={25} />
-        ),
-        title: "Wishlist"
-      }
-    },
-    Chat: {
-      screen: ChatNavigator,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="message-outline" color={tintColor} size={25} />
-        )
-      }
-    },
-    Profile: {
-      screen: ProfileNavigator,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="account-circle-outline" color={tintColor} size={25} />
-        )
-      }
-    }
-  },
-  {
-    initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerStyle: {
-        elevation: 0
-      },
-      headerTintColor: "#2980b9"
-    },
-    tabBarOptions: {
-      activeTintColor: primaryColor,
-      inactiveTintColor: "grey"
-    }
-  }
-);
+// const TabNavigator = createBottomTabNavigator(
+//   {
+//     Home: {
+//       screen: HomeNavigator,
+//       navigationOptions: {
+//         tabBarIcon: ({ tintColor }) => (
+//           <Icon name="home-outline" color={tintColor} size={25} />
+//         )
+//       }
+//     },
+//     Wishlist: {
+//       screen: WishlistNavigator,
+//       navigationOptions: {
+//         tabBarIcon: ({ tintColor }) => (
+//           <Icon name="heart-outline" color={tintColor} size={25} />
+//         ),
+//         title: "Wishlist"
+//       }
+//     },
+//     Chat: {
+//       screen: ChatNavigator,
+//       navigationOptions: {
+//         tabBarIcon: ({ tintColor }) => (
+//           <Icon name="message-outline" color={tintColor} size={25} />
+//         )
+//       }
+//     },
+//     Profile: {
+//       screen: ProfileNavigator,
+//       navigationOptions: {
+//         tabBarIcon: ({ tintColor }) => (
+//           <Icon name="account-circle-outline" color={tintColor} size={25} />
+//         )
+//       }
+//     }
+//   },
+//   {
+//     initialRouteName: "Home",
+//     defaultNavigationOptions: {
+//       headerStyle: {
+//         elevation: 0
+//       },
+//       headerTintColor: "#2980b9"
+//     },
+//     tabBarOptions: {
+//       activeTintColor: primaryColor,
+//       inactiveTintColor: "grey"
+//     }
+//   }
+// );
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(AppNavigator);

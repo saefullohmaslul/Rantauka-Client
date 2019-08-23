@@ -10,9 +10,9 @@ import Iklan from "../components/layouts/Iklan";
 import Filter from "../components/layouts/Filter";
 import Urutkan from "../components/layouts/Urutkan";
 import Booking from "../components/layouts/Booking";
-import BookingCalender from "../components/Booking/BookingCalender";
+import BookingCalender from "../components/layouts/BookingCalender";
 import BookingList from "../components/layouts/BookingList";
-import BookingDuration from "../components/Booking/BookingDuration";
+import BookingDuration from "../components/layouts/BookingDuration";
 
 const KosList = createStackNavigator(
   {

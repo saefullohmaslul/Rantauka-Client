@@ -58,7 +58,7 @@ class KotaPopuler extends Component {
               <TouchableOpacity
                 style={styles.kotaItem}
                 onPress={() =>
-                  this.props.navigation.navigate("KosList", {
+                  this.props.navigation.navigate("HomeList", {
                     namaKota: item.nama
                   })
                 }

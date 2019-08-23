@@ -12,8 +12,6 @@ import {
   InteractionManager
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { AfterInteractions } from "react-native-interactions";
-import axios from "axios";
 
 import KosHubungi from "../../components/Kos/KosHubungi";
 import KosComponent from "../../components/Kos/KosDetail";

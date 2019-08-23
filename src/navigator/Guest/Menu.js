@@ -1,18 +1,44 @@
+import React from "react";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { createBottomTabNavigator } from "react-navigation";
-import { Explore, AuthIndex } from "../../components/layouts";
+
+import { AuthIndex } from "../../components/layouts";
+import ExploreNavigation from "./Explore";
+import LoginNavigator from "./Login";
 
 const MenuNavigator = createBottomTabNavigator({
   Explore: {
-    screen: Explore
+    screen: ExploreNavigation,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="home-outline" color={tintColor} size={25} />
+      )
+    }
   },
   Wishlist: {
-    screen: AuthIndex
+    screen: AuthIndex,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="heart-outline" color={tintColor} size={25} />
+      )
+    }
   },
   Chat: {
-    screen: AuthIndex
+    screen: AuthIndex,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="message-outline" color={tintColor} size={25} />
+      )
+    }
   },
-  Login: {
-    screen: AuthIndex
+  Auth: {
+    screen: LoginNavigator,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="account-circle-outline" color={tintColor} size={25} />
+      ),
+      title: "Login"
+    }
   }
 });
 

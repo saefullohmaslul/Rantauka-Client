@@ -11,9 +11,6 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        name: ""
-      },
       isLogin: false
     };
     this.handleIsLogin();
@@ -28,11 +25,13 @@ class Main extends React.Component {
       const isLogin = await AsyncStorage.getItem("@isLogin");
       if (isLogin === "true") {
         this.setState({ isLogin: true });
+        this.props.navigation.navigate("Logged");
       } else {
-        this.props.navigation.navigate("Root");
+        this.setState({ isLogin: false });
+        this.props.navigation.navigate("Guest");
       }
     } catch (err) {
-      this.props.navigation.navigate("Root");
+      console.log(err);
     }
   };
 
