@@ -1,5 +1,5 @@
 import { createStackNavigator } from "react-navigation";
-import { Profile } from "../../components/layouts";
+import { Profile, Setting } from "../../components/layouts";
 import { primaryColor } from "../../api/constans";
 
 const ProfileNavigator = createStackNavigator(
@@ -9,6 +9,9 @@ const ProfileNavigator = createStackNavigator(
       navigationOptions: {
         header: null
       }
+    },
+    Setting: {
+      screen: Setting
     }
   },
   {

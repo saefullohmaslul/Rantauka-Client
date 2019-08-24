@@ -11,7 +11,10 @@ import MenuNavigator from "./Menu";
 
 const LoggedNavigator = createStackNavigator({
   Menu: {
-    screen: MenuNavigator
+    screen: MenuNavigator,
+    navigationOptions: {
+      header: null
+    }
   }
 });
 

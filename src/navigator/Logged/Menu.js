@@ -42,7 +42,7 @@ const MenuNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "ProfileNavigator"
+    initialRouteName: "Explore"
   }
 );
 

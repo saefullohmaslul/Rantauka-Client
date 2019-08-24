@@ -14,17 +14,15 @@ export default class Setting extends Component {
   }
 
   handleLogout = () => {
-    const handleAuth = this.props.navigation.getParam("handleAuth", null);
     AsyncStorage.getItem("@isLogin")
       .then(data => {
         data = JSON.parse(data);
         data = "false";
         AsyncStorage.removeItem("@token");
         AsyncStorage.setItem("@isLogin", JSON.stringify(data)).then(data => {
-          this.props.navigation.navigate("Root", {
+          this.props.navigation.navigate("Guest", {
             isLogout: true
           });
-          handleAuth(false);
         });
       })
       .catch(err => alert(err));

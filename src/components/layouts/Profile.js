@@ -30,12 +30,7 @@ class Profile extends Component {
             icon="ios-build"
             nama="Pengaturan"
             marginBottom={0.5}
-            handlePress={() =>
-              this.props.navigation.navigate("Setting", {
-                handleLogout: this.props.handleLogout,
-                handleAuth: this.props.handleAuth
-              })
-            }
+            handlePress={() => this.props.navigation.navigate("Setting")}
           />
           <ProdukMenuItem
             icon="ios-call"

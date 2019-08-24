@@ -17,3 +17,4 @@ export { default as Urutkan } from "./Urutkan";
 export { default as Wishlist } from "./Wishlist";
 export { default as BookingCalender } from "./BookingCalender";
 export { default as BookingDuration } from "./BookingDuration";
+export { default as WellcomeScreen } from "./Wellcome";
