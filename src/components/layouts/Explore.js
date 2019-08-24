@@ -6,6 +6,7 @@ import SearchComponent from "../Search/Search";
 import PromoComponent from "../Promo/Promo";
 import PasangIklan from "../Iklan/PasangIklan";
 import KotaPopuler from "../KotaPopuler/KotaPopuler";
+import { bgColor } from "../../api/constans";
 
 class Home extends Component {
   constructor() {
@@ -41,7 +42,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: bgColor
   },
   separator: {
     backgroundColor: "#ecf0f1",

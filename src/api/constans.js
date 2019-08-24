@@ -3,7 +3,7 @@ import { DefaultTheme } from "react-native-paper";
 const primaryColor = "#2980b9";
 const secondaryColor = "#3498db";
 const thirdColor = "#bdc3c7";
-const bgColor = "#ecf0f1";
+const bgColor = "#f6f8f8";
 
 const theme = {
   ...DefaultTheme,

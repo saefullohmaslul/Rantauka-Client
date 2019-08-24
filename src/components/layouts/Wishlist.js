@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { primaryColor } from "../../api/constans";
+import { primaryColor, bgColor } from "../../api/constans";
 
 class Wishlist extends Component {
   render() {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#ecf0f1"
+    backgroundColor: bgColor
   },
   info: {
     textAlign: "center",

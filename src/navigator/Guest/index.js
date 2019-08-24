@@ -5,7 +5,6 @@ import {
   Register,
   KosList,
   KosDetail,
-  AuthIndex,
   AuthRoot
 } from "../../components/layouts";
 import MenuNavigator from "./Menu";
@@ -16,8 +15,8 @@ const GuestNavigator = createStackNavigator(
     Menu: {
       screen: MenuNavigator
     },
-    AuthIndex: {
-      screen: AuthIndex
+    AuthRoot: {
+      screen: AuthRoot
     }
   },
   {

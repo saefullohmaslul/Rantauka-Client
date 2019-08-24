@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Produk from "../../components/Produk/Produk";
 import ProdukMenuItem from "../../components/Produk/ProdukMenuItem";
+import { bgColor } from "../../api/constans";
 
 class Profile extends Component {
   render() {
@@ -47,7 +48,7 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   scrollContainer: {
     position: "relative",
-    backgroundColor: "#ecf0f1"
+    backgroundColor: bgColor
   },
   container: {
     marginTop: 50

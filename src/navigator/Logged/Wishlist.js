@@ -1,10 +1,10 @@
 import { createStackNavigator } from "react-navigation";
-
-import Wishlist from "../components/layouts/Wishlist";
+import { Wishlist } from "../../components/layouts";
+import { primaryColor } from "../../api/constans";
 
 const WishlistNavigator = createStackNavigator(
   {
-    Wishlist: {
+    Index: {
       screen: Wishlist,
       navigationOptions: {
         title: "Wishlist"
@@ -14,14 +14,15 @@ const WishlistNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        elevation: 0
+        elevation: 0,
+        borderBottomColor: "transparent"
       },
-      headerTintColor: "#2980b9"
+      headerTintColor: primaryColor
     }
   }
 );
 
-Wishlist.navigationOptions = ({ navigation }) => {
+WishlistNavigator.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
@@ -30,5 +31,4 @@ Wishlist.navigationOptions = ({ navigation }) => {
     tabBarVisible
   };
 };
-
 export default WishlistNavigator;

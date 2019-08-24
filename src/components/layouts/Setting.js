@@ -13,19 +13,13 @@ export default class Setting extends Component {
     };
   }
 
-  handleLogout = () => {
-    AsyncStorage.getItem("@isLogin")
-      .then(data => {
-        data = JSON.parse(data);
-        data = "false";
-        AsyncStorage.removeItem("@token");
-        AsyncStorage.setItem("@isLogin", JSON.stringify(data)).then(data => {
-          this.props.navigation.navigate("Guest", {
-            isLogout: true
-          });
-        });
-      })
-      .catch(err => alert(err));
+  handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem("@token");
+      this.props.navigation.navigate("Guest");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {

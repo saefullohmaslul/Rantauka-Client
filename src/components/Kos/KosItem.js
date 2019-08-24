@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Card, Title } from "react-native-paper";
+import { BASE_URL } from "../../api/explore";
 
 class KosItem extends Component {
   convertRupiah = nominal => {
@@ -23,7 +24,7 @@ class KosItem extends Component {
       <View style={styles.container}>
         <Image
           source={{
-            uri: `http://192.168.0.17:5000/${this.props.data.images[0].uri}`
+            uri: `${BASE_URL}/${this.props.data.images[0].uri}`
           }}
           style={styles.image}
         />

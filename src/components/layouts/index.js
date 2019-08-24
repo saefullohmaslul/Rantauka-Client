@@ -2,7 +2,6 @@ export { default as Login } from "./Login";
 export { default as Profile } from "./Profile";
 export { default as Register } from "./Register";
 export { default as Explore } from "./Explore";
-export { default as AuthIndex } from "./AuthIndex";
 export { default as AuthRoot } from "./AuthRoot";
 export { default as Booking } from "./Booking";
 export { default as BookingList } from "./BookingList";

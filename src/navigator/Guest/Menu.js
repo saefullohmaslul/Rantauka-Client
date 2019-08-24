@@ -2,7 +2,7 @@ import React from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { createBottomTabNavigator } from "react-navigation";
 
-import { AuthIndex } from "../../components/layouts";
+import { AuthRoot } from "../../components/layouts";
 import ExploreNavigation from "./Explore";
 import LoginNavigator from "./Login";
 
@@ -16,7 +16,7 @@ const MenuNavigator = createBottomTabNavigator({
     }
   },
   Wishlist: {
-    screen: AuthIndex,
+    screen: AuthRoot,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
         <Icon name="heart-outline" color={tintColor} size={25} />
@@ -24,7 +24,7 @@ const MenuNavigator = createBottomTabNavigator({
     }
   },
   Chat: {
-    screen: AuthIndex,
+    screen: AuthRoot,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
         <Icon name="message-outline" color={tintColor} size={25} />

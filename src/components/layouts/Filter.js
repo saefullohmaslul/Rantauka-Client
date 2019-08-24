@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
-import Header from "../../components/Header/Header";
 import InputText from "../../components/Input/InputText";
 import InputCheckbox from "../../components/Input/InputCheckbox";
 import SubmitBottom from "../../components/Button/SubmitBottom";
@@ -69,7 +68,6 @@ class Filter extends Component {
             <View>
               {this.state.fasilitas.map(fasilitas => (
                 <InputCheckbox
-                  
                   key={fasilitas.id}
                   status={fasilitas.status ? "checked" : "unchecked"}
                   handleFasilitas={this.handleFasilitas}
@@ -101,7 +99,6 @@ class Filter extends Component {
 }
 
 const styles = StyleSheet.create({
-  // container: { marginBottom: 45 },
   contentContainer: { paddingHorizontal: 20, marginBottom: 45 },
   h2: {
     color: "#2c3e50",

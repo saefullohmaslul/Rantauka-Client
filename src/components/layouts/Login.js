@@ -26,14 +26,11 @@ class Login extends Component {
   };
 
   handleLogin = async data => {
-    const { getParam } = this.props.navigation;
-    const handleAuth = getParam("handleAuth", null);
     try {
       const response = await loginAccount(data);
       if (response) {
         await AsyncStorage.setItem("@isLogin", "true");
         await AsyncStorage.setItem("@token", response.data.token);
-        handleAuth(true);
         this.props.navigation.navigate("Logged");
       }
     } catch (err) {
@@ -42,8 +39,7 @@ class Login extends Component {
   };
 
   render() {
-    const { replace, getParam } = this.props.navigation;
-    // const handleLogin = getParam("handleLogin", "false");
+    const { replace } = this.props.navigation;
 
     return (
       <View style={styles.container}>

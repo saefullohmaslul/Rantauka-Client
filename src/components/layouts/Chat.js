@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
 import Message from "../Message/Message";
+import { bgColor } from "../../api/constans";
 
 class Chat extends Component {
   constructor() {
@@ -40,7 +41,7 @@ class Chat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ecf0f1",
+    backgroundColor: bgColor,
     padding: 20
   }
 });

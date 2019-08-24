@@ -2,21 +2,24 @@ import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { Explore, Wishlist, Chat, Profile } from "../../components/layouts";
 import ProfileNavigator from "./Profile";
+import ExploreNavigator from "./Explore";
+import WishlistNavigator from "./Wishlist";
+import ChatNavigator from "./Chat";
 
 const MenuNavigator = createBottomTabNavigator(
   {
     Explore: {
-      screen: Explore,
+      screen: ExploreNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Icon name="home-outline" color={tintColor} size={25} />
-        )
+        ),
+        title: "Explore"
       }
     },
     Wishlist: {
-      screen: Wishlist,
+      screen: WishlistNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Icon name="heart-outline" color={tintColor} size={25} />
@@ -24,7 +27,7 @@ const MenuNavigator = createBottomTabNavigator(
       }
     },
     Chat: {
-      screen: Chat,
+      screen: ChatNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Icon name="message-outline" color={tintColor} size={25} />

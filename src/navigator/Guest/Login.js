@@ -1,11 +1,11 @@
 import { createStackNavigator } from "react-navigation";
-import { Login, Register, AuthIndex } from "../../components/layouts";
+import { Login, Register, AuthRoot } from "../../components/layouts";
 import { primaryColor } from "../../api/constans";
 
 const LoginNavigator = createStackNavigator(
   {
     Index: {
-      screen: AuthIndex,
+      screen: AuthRoot,
       navigationOptions: {
         header: null
       }
