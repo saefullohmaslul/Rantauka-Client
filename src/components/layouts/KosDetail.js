@@ -122,11 +122,11 @@ class KosDetail extends Component {
             ])}
             scrollEventThrottle={16}
           >
-            {kostList && <KosComponent kostList={kostList.data} />}
+            {kostList && <KosComponent kostList={kostList} />}
           </ScrollView>
           {kostList && (
             <KosHubungi
-              kostList={kostList.data}
+              kostList={kostList}
               navigation={this.props.navigation}
             />
           )}

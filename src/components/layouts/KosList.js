@@ -15,6 +15,9 @@ import SearchInput from "../../components/Search/SearchInput";
 import { primaryColor } from "../../api/constans";
 import { getAllKostList } from "../../api/explore";
 
+import { connect } from "react-redux";
+import { getHouses } from "../../_actions/houses";
+
 const ModalComponent = props => (
   <Modal
     style={{
@@ -88,6 +91,7 @@ class KosList extends Component {
   async componentDidMount() {
     try {
       const kostList = await getAllKostList();
+      this.props.dispatch(getHouses());
       this.setState({
         kostList
       });
@@ -117,6 +121,7 @@ class KosList extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { height, width } = Dimensions.get("window");
     const autoFocus = this.props.navigation.getParam("autoFocus", false);
     return (
@@ -128,28 +133,31 @@ class KosList extends Component {
           margin={17}
           autoFocus={autoFocus}
         />
-        <FlatList
-          style={{ height: height - 100 }}
-          data={this.state.kostList.data}
-          extraData={this.state}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("HomeDetail", {
-                  kostList: item.id
-                })
-              }
-            >
-              <KosItem
-                data={item}
-                id={index + 1}
-                max={this.findIndex(this.state.kostList.data)}
-              />
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-        />
+        {this.props.houses.data ? (
+          <FlatList
+            style={{ height: height - 100 }}
+            // data={this.state.kostList.data}
+            data={this.props.houses.data}
+            extraData={this.props}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("HomeDetail", {
+                    kostList: item.id
+                  })
+                }
+              >
+                <KosItem
+                  data={item}
+                  id={index + 1}
+                  max={this.findIndex(this.props.houses.data)}
+                />
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.id.toString()}
+            showsVerticalScrollIndicator={false}
+          />
+        ) : null}
         <View style={styles.filterUrutkan}>
           <Icon
             style={[styles.iconFilter, { color: primaryColor }]}
@@ -183,6 +191,14 @@ class KosList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    houses: state.houses
+  };
+};
+
+export default connect(mapStateToProps)(KosList);
 
 const styles = StyleSheet.create({
   container: {
@@ -233,5 +249,3 @@ const styles = StyleSheet.create({
   },
   iconUrutkan: { marginLeft: 3 }
 });
-
-export default KosList;

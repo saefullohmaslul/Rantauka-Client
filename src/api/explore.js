@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_HOST = "http://192.168.1.14:5000";
+const API_HOST = "http://192.168.1.28:5000";
 
-export const BASE_URL = "http://192.168.1.14:5000";
+export const BASE_URL = "http://192.168.1.28:5000";
 
 export const signupAccount = async data => {
   const response = await axios({
@@ -49,7 +49,6 @@ export const postKost = async (data, token) => {
     hargaKost,
     luasKamar,
     deskripsiKost,
-    booking,
     latitudeKost,
     longitudeKost,
     fotoKost,
@@ -68,7 +67,8 @@ export const postKost = async (data, token) => {
   formData.append("house_width", luasKamar.lebar);
   formData.append("house_description", deskripsiKost);
   formData.append("house_price", hargaKost);
-  formData.append("booking", booking);
+  formData.append("booking_status", true);
+
   fasilitasKost.forEach(fasilitas => {
     formData.append("facilities", JSON.stringify(fasilitas));
   });

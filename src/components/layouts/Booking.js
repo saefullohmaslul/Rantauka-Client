@@ -5,16 +5,37 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from "react-native";
 import { Button, Checkbox } from "react-native-paper";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { primaryColor } from "../../api/constans";
+import { primaryColor, bgColor } from "../../api/constans";
 
+const { width } = Dimensions.get("screen");
 export default class Booking extends Component {
-  state = {
-    checked: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      checked: false,
+      booking: {
+        rentalDate: undefined,
+        rentalDuration: undefined,
+        userId: undefined,
+        houseId: undefined
+      },
+      house: {
+        houseImage:
+          "https://static.mamikos.com/uploads/cache/data/style/2018-12-05/MI1iyNrc-540x720.jpg",
+        houseName: undefined,
+        housePrice: undefined
+      },
+      user: {
+        fullName: undefined,
+        telephone: undefined
+      }
+    };
+  }
 
   render() {
     const { checked } = this.state;
@@ -25,22 +46,26 @@ export default class Booking extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>
-          <View style={style.container}>
-            <View style={style.time}>
-              <View style={style.icon}>
+          <View style={styles.container}>
+            <View style={styles.time}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate("BookingCalender");
+                }}
+              >
                 <Text>Tanggal Masuk </Text>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      this.props.navigation.navigate("BookingCalender");
-                    }}
-                  >
-                    <EvilIcons name="calendar" size={18} />
-                  </TouchableOpacity>
+                  <EvilIcons name="calendar" size={18} />
                   <Text>{time}</Text>
                 </View>
-              </View>
-              <View style={style.icon}>
+              </TouchableOpacity>
+
+              <View
+                style={{
+                  alignItems: "flex-end",
+                  flex: 1
+                }}
+              >
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate("BookingDuration");
@@ -50,18 +75,13 @@ export default class Booking extends Component {
                   <Text>{duration}</Text>
                 </TouchableOpacity>
               </View>
-              <View style={style.icon}>
-                <Text>Tanggal Keluar</Text>
-                <Text>21 Maret 2020</Text>
-              </View>
             </View>
-            <View style={style.line} />
+            <View style={styles.line} />
             <View style={{ flex: 1, flexDirection: "row", marginVertical: 10 }}>
               <View style={{ alignItems: "flex-start", marginRight: 15 }}>
                 <Image
                   source={{
-                    uri:
-                      "https://static.mamikos.com/uploads/cache/data/style/2018-12-05/MI1iyNrc-540x720.jpg"
+                    uri: this.state.house.houseImage
                   }}
                   style={{ width: 100, height: 100 }}
                 />
@@ -83,17 +103,17 @@ export default class Booking extends Component {
                 </View>
               </View>
             </View>
-            <View style={style.line} />
+            <View style={styles.line} />
             <View style={{ flex: 1, marginVertical: 10 }}>
-              <View style={style.residance}>
+              <View style={styles.residance}>
                 <View style={{ alignItems: "flex-start" }}>
-                  <Text style={{ fontWeight: "bold" }}>Data Penghuni</Text>
+                  <Text style={styles.header}>Data Penghuni</Text>
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
                   <Text>Ubah</Text>
                 </View>
               </View>
-              <View style={style.residance}>
+              <View style={styles.residance}>
                 <View style={{ alignItems: "flex-start" }}>
                   <Text>Nama Lengkap</Text>
                 </View>
@@ -101,7 +121,7 @@ export default class Booking extends Component {
                   <Text>Lol</Text>
                 </View>
               </View>
-              <View style={style.residance}>
+              <View style={styles.residance}>
                 <View style={{ alignItems: "flex-start" }}>
                   <Text>Jenis Kelamin</Text>
                 </View>
@@ -109,7 +129,7 @@ export default class Booking extends Component {
                   <Text>Laki-laki</Text>
                 </View>
               </View>
-              <View style={style.residance}>
+              <View style={styles.residance}>
                 <View style={{ alignItems: "flex-start" }}>
                   <Text>No. Handphone</Text>
                 </View>
@@ -117,7 +137,7 @@ export default class Booking extends Component {
                   <Text>08384028732</Text>
                 </View>
               </View>
-              <View style={style.residance}>
+              <View style={styles.residance}>
                 <View style={{ alignItems: "flex-start" }}>
                   <Text>Pekerjaan</Text>
                 </View>
@@ -126,7 +146,7 @@ export default class Booking extends Component {
                 </View>
               </View>
             </View>
-            <View style={style.line} />
+            <View style={styles.line} />
             <View>
               <Text
                 style={{
@@ -138,77 +158,75 @@ export default class Booking extends Component {
                 Keterangan Biaya Lain
               </Text>
             </View>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "flex-end",
-                alignContent: "flex-end",
-                marginTop: 30
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginBottom: 5
-                }}
-              >
-                <Checkbox
-                  color={primaryColor}
-                  status={checked ? "checked" : "unchecked"}
-                  onPress={() => {
-                    this.setState({ checked: !checked });
-                  }}
-                />
-                <Text>
-                  Saya menyetujui syarat dan ketentuan berlaku dan memastikan
-                  data di atas benar.
-                </Text>
-              </View>
-              <View style={{ marginBottom: 5 }}>
-                <Button
-                  color={primaryColor}
-                  disabled={!isEnable}
-                  mode="contained"
-                  onPress={() => {
-                    this.props.navigation.navigate("BookingList", {
-                      handleBack: () => this.props.navigation.navigate("Index")
-                    });
-                  }}
-                >
-                  Book
-                </Button>
-              </View>
-            </View>
           </View>
         </ScrollView>
+        <View style={styles.submitContainer}>
+          <View style={styles.submitText}>
+            <Checkbox
+              color={primaryColor}
+              status={checked ? "checked" : "unchecked"}
+              onPress={() => {
+                this.setState({ checked: !checked });
+              }}
+            />
+            <Text style={{ flex: 1 }}>
+              Saya menyetujui syarat dan ketentuan berlaku dan memastikan data
+              di atas benar.
+            </Text>
+          </View>
+          <View>
+            <Button
+              color={primaryColor}
+              disabled={!isEnable}
+              mode="contained"
+              onPress={() => {
+                this.props.navigation.navigate("BookingList", {
+                  handleBack: () => this.props.navigation.navigate("Index")
+                });
+              }}
+            >
+              Book
+            </Button>
+          </View>
+        </View>
       </View>
     );
   }
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
     marginHorizontal: 10
+  },
+  header: {
+    fontWeight: "bold"
+  },
+  submitContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: width,
+    borderTopWidth: 1,
+    borderTopColor: bgColor
+  },
+  submitText: {
+    flexDirection: "row",
+    flex: 1,
+    marginBottom: 10
   },
   time: {
     flexDirection: "row",
-    marginRight: 15,
-    marginVertical: 15
+    marginBottom: 15,
+    flex: 1
   },
   residance: {
     flex: 1,
     flexDirection: "row",
     marginBottom: 5
   },
-  icon: {
-    marginRight: 25
-  },
   line: {
     padding: 0,
     backgroundColor: "#f2f0f0",
-    width: 900,
+    width: width - 20,
     height: 5
   }
 });
