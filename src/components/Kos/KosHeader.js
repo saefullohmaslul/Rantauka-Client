@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 class KosHeader extends Component {
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.descriptionContainer}>
-          <Text style={[styles.jenisKos, { color: btnColor }]}>
+          <Text style={[styles.jenisKos, { color: primaryColor }]}>
             {this.props.jenis}
           </Text>
           <Text style={styles.separated}>•</Text>

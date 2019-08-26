@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, Picker } from "react-native";
 import { Button } from "react-native-paper";
 
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 export default class Duration extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ export default class Duration extends Component {
         </View>
         <View style={{ justifyContent: "flex-end" }}>
           <Button
-            color={btnColor}
+            color={primaryColor}
             mode="contained"
             onPress={() => {
               this.props.navigation.navigate("Booking", {

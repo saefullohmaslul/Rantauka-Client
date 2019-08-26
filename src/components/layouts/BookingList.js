@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, Icon } from "react-native";
 import { Card, Appbar } from "react-native-paper";
 import { HeaderBackButton } from "react-navigation";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 export default class Bookinglist extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class Bookinglist extends Component {
     );
     return {
       headerLeft: (
-        <HeaderBackButton tintColor={btnColor} onPress={handleBack} />
+        <HeaderBackButton tintColor={primaryColor} onPress={handleBack} />
       ),
       title: "Booking"
     };
@@ -60,7 +60,7 @@ export default class Bookinglist extends Component {
                   </View>
                 </View>
                 <View style={{ marginTop: 15 }}>
-                  <Text style={{ fontSize: 15, color: btnColor }}>
+                  <Text style={{ fontSize: 15, color: primaryColor }}>
                     Tunggu Konfirmasi
                   </Text>
                 </View>

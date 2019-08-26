@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 
 class SubmitBottom extends Component {
   render() {
     return (
       <TouchableOpacity
         onPress={this.props.onPress}
-        style={[styles.submit, { backgroundColor: btnColor }]}
+        style={[styles.submit, { backgroundColor: primaryColor }]}
       >
         <Text style={styles.btnSubmit}>{this.props.title}</Text>
       </TouchableOpacity>

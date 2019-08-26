@@ -1,26 +1,23 @@
 import { createStackNavigator } from "react-navigation";
-
-import Chat from "../screens/Chat/Chat";
-import ChatDetail from "../screens/Chat/ChatDetail";
+import { Chat } from "../../components/layouts";
+import { primaryColor } from "../../api/constans";
 
 const ChatNavigator = createStackNavigator(
   {
-    Chat: {
+    Index: {
       screen: Chat,
       navigationOptions: {
         title: "Chat"
       }
-    },
-    ChatDetail: {
-      screen: ChatDetail
     }
   },
   {
     defaultNavigationOptions: {
       headerStyle: {
-        elevation: 0
+        elevation: 0,
+        borderBottomColor: "transparent"
       },
-      headerTintColor: "#2980b9"
+      headerTintColor: primaryColor
     }
   }
 );
@@ -34,5 +31,4 @@ ChatNavigator.navigationOptions = ({ navigation }) => {
     tabBarVisible
   };
 };
-
 export default ChatNavigator;

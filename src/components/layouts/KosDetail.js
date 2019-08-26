@@ -12,12 +12,10 @@ import {
   InteractionManager
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { AfterInteractions } from "react-native-interactions";
-import axios from "axios";
 
 import KosHubungi from "../../components/Kos/KosHubungi";
 import KosComponent from "../../components/Kos/KosDetail";
-import { btnColor } from "../../constant";
+import { primaryColor } from "../../api/constans";
 import { getKostById } from "../../api/explore";
 
 class KosDetail extends Component {
@@ -52,7 +50,7 @@ class KosDetail extends Component {
     this.props.navigation.setParams({
       bgColor: this.scrollY.interpolate({
         inputRange: [0, Dimensions.get("window").height / 2 - 40],
-        outputRange: ["transparent", btnColor],
+        outputRange: ["transparent", primaryColor],
         extrapolate: "clamp"
       })
     });
@@ -124,11 +122,11 @@ class KosDetail extends Component {
             ])}
             scrollEventThrottle={16}
           >
-            {kostList && <KosComponent kostList={kostList.data} />}
+            {kostList && <KosComponent kostList={kostList} />}
           </ScrollView>
           {kostList && (
             <KosHubungi
-              kostList={kostList.data}
+              kostList={kostList}
               navigation={this.props.navigation}
             />
           )}

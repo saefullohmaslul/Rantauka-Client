@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import { btnColor } from "../../constant";
-
 // create a component
 class KosMenu extends Component {
   render() {
