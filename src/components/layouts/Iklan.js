@@ -151,8 +151,8 @@ class Iklan extends Component {
       await this.setState({
         kost: {
           ...this.state.kost,
-          latitudeKost: this.state.region.longitude.toString(),
-          longitudeKost: this.state.region.latitude.toString()
+          latitudeKost: this.state.region.latitude.toString(),
+          longitudeKost: this.state.region.longitude.toString()
         }
       });
       const response = await postKost(this.state.kost, token);

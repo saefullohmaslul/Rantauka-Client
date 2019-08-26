@@ -26,22 +26,12 @@ class KosDescription extends Component {
               showsHorizontalScrollIndicator={false}
               horizontal={true}
             >
-              <View style={styles.fasilitasContainer}>
-                <Icon style={styles.icon} name="bed-empty" size={28} />
-                <Text style={styles.fasilitasText}>Kasur</Text>
-              </View>
-              <View style={styles.fasilitasContainer}>
-                <Icon style={styles.icon} name="water" size={28} />
-                <Text style={styles.fasilitasText}>Kamar Mandi Luar</Text>
-              </View>
-              <View style={styles.fasilitasContainer}>
-                <Icon style={styles.icon} name="weather-windy" size={28} />
-                <Text style={styles.fasilitasText}>AC</Text>
-              </View>
-              <View style={styles.fasilitasContainer}>
-                <Icon style={styles.icon} name="wifi" size={28} />
-                <Text style={styles.fasilitasText}>Wifi</Text>
-              </View>
+              {kostList.facilities.map((facility, id) => (
+                <View style={styles.fasilitasContainer} key={id}>
+                  <Icon style={styles.icon} name={facility.code} size={28} />
+                  <Text style={styles.fasilitasText}>{facility.name}</Text>
+                </View>
+              ))}
             </ScrollView>
           </View>
         </View>
