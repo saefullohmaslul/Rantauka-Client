@@ -14,8 +14,6 @@ import { connect } from "react-redux";
 import KosItem from "../../components/Kos/KosItem";
 import SearchInput from "../../components/Search/SearchInput";
 import { primaryColor } from "../../api/constans";
-import { getAllKostList } from "../../api/explore";
-
 import { getHouses } from "../../_actions/houses";
 
 const ModalComponent = props => (
@@ -83,18 +81,13 @@ class KosList extends Component {
   constructor() {
     super();
     this.state = {
-      kostList: [],
       modalVisible: false
     };
   }
 
   async componentDidMount() {
     try {
-      const kostList = await getAllKostList();
       this.props.dispatch(getHouses());
-      this.setState({
-        kostList
-      });
     } catch (err) {
       console.log(err);
     }
@@ -121,8 +114,7 @@ class KosList extends Component {
   };
 
   render() {
-    console.log(this.props);
-    const { height, width } = Dimensions.get("window");
+    const { height } = Dimensions.get("window");
     const autoFocus = this.props.navigation.getParam("autoFocus", false);
     return (
       <View style={styles.container}>

@@ -6,6 +6,7 @@ import changePrice from "../../utils/changePrice";
 
 class KosItem extends Component {
   render() {
+    console.log(`${API_HOST}${this.props.data.images[0].uri}`);
     return (
       <View style={styles.container}>
         <Image

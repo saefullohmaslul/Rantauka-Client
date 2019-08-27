@@ -1,9 +1,9 @@
 import axios from "axios";
-import { BASE_URL } from "../api/explore";
+import { API_HOST } from "react-native-dotenv";
 
 export const getHouses = () => {
   return {
     type: "GET_HOUSES",
-    payload: axios.get(`${BASE_URL}/api/v1/houses`)
+    payload: axios.get(`${API_HOST}/api/v1/houses`)
   };
 };
