@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Maps from "../../components/Maps/Maps";
 import InputText from "../../components/Input/InputText";
@@ -17,7 +18,6 @@ import SubmitBottom from "../../components/Button/SubmitBottom";
 import IklanProvinsi from "../../components/Iklan/IklanProvinsi";
 import IklanJenisKost from "../../components/Iklan/IklanJenisKost";
 import IklanDeskripsi from "../../components/Iklan/IklanDeskripsi";
-import AsyncStorage from "@react-native-community/async-storage";
 import { postKost } from "../../api/explore";
 import IklanFasilitas from "../../components/Iklan/IklanFasilitas";
 

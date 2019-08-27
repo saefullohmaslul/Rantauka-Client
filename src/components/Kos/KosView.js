@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Image, ScrollView, Dimensions } from "react-native";
-import { BASE_URL } from "../../api/explore";
+import { API_HOST } from "react-native-dotenv";
 
 class KosView extends Component {
   render() {
@@ -19,7 +19,7 @@ class KosView extends Component {
                 key={id}
                 style={[styles.image, { width: width }]}
                 source={{
-                  uri: `${BASE_URL}/${image.uri}`
+                  uri: `${API_HOST}${image.uri}`
                 }}
               />
             );

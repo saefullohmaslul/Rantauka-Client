@@ -1,21 +1,37 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Produk from "../../components/Produk/Produk";
 import ProdukMenuItem from "../../components/Produk/ProdukMenuItem";
 import { bgColor } from "../../api/constans";
+import { getUser } from "../../api/explore";
 
 class Profile extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: undefined
+    };
+  }
+
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem("@token");
+    const response = await getUser(token);
+    this.setState({ user: response.data });
+  }
+
   render() {
-    return (
+    const { user } = this.state;
+    return user ? (
       <ScrollView
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.headerContainer}>
           <Ionicons style={styles.icon} name="ios-person" size={23} />
-          <Text style={styles.userName}>Saefulloh Maslul</Text>
+          <Text style={styles.userName}>{user.full_name}</Text>
           <View style={styles.header} />
         </View>
         <View style={styles.container}>
@@ -41,7 +57,7 @@ class Profile extends Component {
           <ProdukMenuItem icon="ios-list" nama="Syarat dan Ketentuan" />
         </View>
       </ScrollView>
-    );
+    ) : null;
   }
 }
 

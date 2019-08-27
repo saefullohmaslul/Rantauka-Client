@@ -2,29 +2,31 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { Button } from "react-native-paper";
+import { connect } from "react-redux";
 
 import { primaryColor } from "../../api/constans";
+import { changeBookingDate } from "../../_actions/booking";
 
-export default class Calenders extends Component {
+class Calenders extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.onDayPress = this.onDayPress.bind(this);
+    this.state = {
+      selected: undefined
+    };
   }
-  onDayPress(day) {
+
+  onDayPress = day => {
+    this.props.dispatch(changeBookingDate(day.dateString));
     this.setState({
       selected: day.dateString
     });
-    // this.props.navigation.navigate('Booking', { bookingDate : day.dateString } )
-  }
+  };
+
   render() {
     return (
       <View>
-        <View style={{ marginLeft: 10, marginTop: 10 }}>
-          <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-            Mulai Kost Kapan?
-          </Text>
-          <Text>{this.state.selected}</Text>
+        <View style={styles.container}>
+          <Text style={styles.header}>Mulai Kost Kapan?</Text>
         </View>
         <Calendar
           hideDayNames={true}
@@ -38,13 +40,9 @@ export default class Calenders extends Component {
           }}
         />
         <Button
-          style={style.button}
+          style={styles.button}
           mode="contained"
-          onPress={() =>
-            this.props.navigation.navigate("Booking", {
-              bookingDate: this.state.selected
-            })
-          }
+          onPress={() => this.props.navigation.navigate("Booking")}
         >
           Save
         </Button>
@@ -53,7 +51,17 @@ export default class Calenders extends Component {
   }
 }
 
-const style = StyleSheet.create({
+const mapStateToProps = state => {
+  return {
+    booking: state.booking
+  };
+};
+
+export default connect(mapStateToProps)(Calenders);
+
+const styles = StyleSheet.create({
+  container: { marginLeft: 10, marginTop: 10 },
+  header: { fontWeight: "bold", fontSize: 15 },
   button: {
     backgroundColor: primaryColor,
     marginHorizontal: 10

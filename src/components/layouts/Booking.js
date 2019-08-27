@@ -10,40 +10,53 @@ import {
 } from "react-native";
 import { Button, Checkbox } from "react-native-paper";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API_HOST } from "react-native-dotenv";
+import { connect } from "react-redux";
+
 import { primaryColor, bgColor } from "../../api/constans";
+import { getBooking } from "../../_actions/booking";
+import changePrice from "../../utils/changePrice";
 
 const { width } = Dimensions.get("screen");
-export default class Booking extends Component {
+class Booking extends Component {
   constructor() {
     super();
     this.state = {
       checked: false,
-      booking: {
-        rentalDate: undefined,
-        rentalDuration: undefined,
-        userId: undefined,
-        houseId: undefined
-      },
-      house: {
-        houseImage:
-          "https://static.mamikos.com/uploads/cache/data/style/2018-12-05/MI1iyNrc-540x720.jpg",
-        houseName: undefined,
-        housePrice: undefined
-      },
-      user: {
-        fullName: undefined,
-        telephone: undefined
-      }
+      booking: undefined,
+      tanggal: undefined,
+      duration: undefined
     };
   }
+
+  async componentDidMount() {
+    const kostList = this.props.navigation.getParam("kostList");
+    const houseId = kostList.id;
+    const token = await AsyncStorage.getItem("@token");
+    this.props.dispatch(getBooking(houseId, token));
+  }
+
+  submitBooking = async () => {
+    const token = await AsyncStorage.getItem("@token");
+    const data = {
+      checkIn: this.props.booking.date,
+      duration: this.props.booking.duration,
+      houseId: this.props.booking.data.house.id
+    };
+    const response = await createBooking(data, token);
+    console.log(response);
+    this.props.navigation.navigate("BookingList", {
+      handleBack: () => this.props.navigation.navigate("Index")
+    });
+  };
 
   render() {
     const { checked } = this.state;
     const isEnable = checked == !false;
-    const time = this.props.navigation.getParam("bookingDate");
-    const duration = this.props.navigation.getParam("durationtime");
+    const { data } = this.props.booking;
 
-    return (
+    return data ? (
       <View style={{ flex: 1 }}>
         <ScrollView>
           <View style={styles.container}>
@@ -56,10 +69,9 @@ export default class Booking extends Component {
                 <Text>Tanggal Masuk </Text>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <EvilIcons name="calendar" size={18} />
-                  <Text>{time}</Text>
+                  <Text>{this.props.booking.date}</Text>
                 </View>
               </TouchableOpacity>
-
               <View
                 style={{
                   alignItems: "flex-end",
@@ -72,7 +84,7 @@ export default class Booking extends Component {
                   }}
                 >
                   <Text>Durasi Sewa</Text>
-                  <Text>{duration}</Text>
+                  <Text>{this.props.booking.duration} bulan</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -81,25 +93,19 @@ export default class Booking extends Component {
               <View style={{ alignItems: "flex-start", marginRight: 15 }}>
                 <Image
                   source={{
-                    uri: this.state.house.houseImage
+                    uri: `${API_HOST}${data.house.images[0].uri}`
                   }}
                   style={{ width: 100, height: 100 }}
                 />
               </View>
-              <View style={{ flex: 1, alignItems: "flex-start" }}>
-                <Text>Nama Kos</Text>
-                <View style={{ flex: 1, flexDirection: "row", marginTop: 10 }}>
-                  <View style={{ flex: 1, flexDirection: "row" }}>
-                    <EvilIcons name="calendar" size={25} />
-                    <EvilIcons name="share-google" size={25} />
-                  </View>
+              <View>
+                <View style={{ flex: 1, alignItems: "flex-start" }}>
+                  <Text>{data.house.house_name}</Text>
                 </View>
-                <View style={{ flex: 1, flexDirection: "row" }}>
-                  <View style={{ flex: 1, flexDirection: "row" }}>
-                    <Text style={{ fontWeight: "bold" }}>
-                      Rp. 1.750.000 / bulan
-                    </Text>
-                  </View>
+                <View style={{ justifyContent: "flex-end" }}>
+                  <Text style={{ fontWeight: "bold" }}>
+                    Rp. {changePrice(data.house.house_price)} / bulan
+                  </Text>
                 </View>
               </View>
             </View>
@@ -109,16 +115,14 @@ export default class Booking extends Component {
                 <View style={{ alignItems: "flex-start" }}>
                   <Text style={styles.header}>Data Penghuni</Text>
                 </View>
-                <View style={{ flex: 1, alignItems: "flex-end" }}>
-                  <Text>Ubah</Text>
-                </View>
+                <View style={{ flex: 1, alignItems: "flex-end" }}></View>
               </View>
               <View style={styles.residance}>
                 <View style={{ alignItems: "flex-start" }}>
                   <Text>Nama Lengkap</Text>
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
-                  <Text>Lol</Text>
+                  <Text>{data.userBooking.full_name}</Text>
                 </View>
               </View>
               <View style={styles.residance}>
@@ -134,15 +138,7 @@ export default class Booking extends Component {
                   <Text>No. Handphone</Text>
                 </View>
                 <View style={{ flex: 1, alignItems: "flex-end" }}>
-                  <Text>08384028732</Text>
-                </View>
-              </View>
-              <View style={styles.residance}>
-                <View style={{ alignItems: "flex-start" }}>
-                  <Text>Pekerjaan</Text>
-                </View>
-                <View style={{ flex: 1, alignItems: "flex-end" }}>
-                  <Text>Karyawan</Text>
+                  <Text>{data.userBooking.telephone}</Text>
                 </View>
               </View>
             </View>
@@ -155,8 +151,9 @@ export default class Booking extends Component {
                   marginTop: 10
                 }}
               >
-                Keterangan Biaya Lain
+                Deskripsi Kos
               </Text>
+              <Text>{this.props.booking.data.house.house_description}</Text>
             </View>
           </View>
         </ScrollView>
@@ -169,7 +166,12 @@ export default class Booking extends Component {
                 this.setState({ checked: !checked });
               }}
             />
-            <Text style={{ flex: 1 }}>
+            <Text
+              style={{ flex: 1 }}
+              onPress={() => {
+                this.setState({ checked: !checked });
+              }}
+            >
               Saya menyetujui syarat dan ketentuan berlaku dan memastikan data
               di atas benar.
             </Text>
@@ -179,20 +181,24 @@ export default class Booking extends Component {
               color={primaryColor}
               disabled={!isEnable}
               mode="contained"
-              onPress={() => {
-                this.props.navigation.navigate("BookingList", {
-                  handleBack: () => this.props.navigation.navigate("Index")
-                });
-              }}
+              onPress={this.submitBooking}
             >
               Book
             </Button>
           </View>
         </View>
       </View>
-    );
+    ) : null;
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    booking: state.booking
+  };
+};
+
+export default connect(mapStateToProps)(Booking);
 
 const styles = StyleSheet.create({
   container: {

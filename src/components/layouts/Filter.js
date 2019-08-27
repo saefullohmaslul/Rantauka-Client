@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Picker } from "react-native";
 
-import InputText from "../../components/Input/InputText";
 import InputCheckbox from "../../components/Input/InputCheckbox";
 import SubmitBottom from "../../components/Button/SubmitBottom";
 
@@ -28,7 +27,9 @@ class Filter extends Component {
         { id: 1, status: false, title: "Pasutri" },
         { id: 2, status: false, title: "Akses 24 Jam" },
         { id: 3, status: false, title: "Khusus Karyawan" }
-      ]
+      ],
+      gender: "Putra",
+      duration: 1
     };
   }
 
@@ -56,13 +57,47 @@ class Filter extends Component {
     this.props.navigation.goBack();
   };
 
+  changePicker = (state, value) => {
+    this.setState({
+      [state]: value
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.contentContainer}>
-          <InputText h2="Gender" placeholder="Masukkan gender" />
-          <InputText h2="Jangka Waktu" placeholder="Jangka waktu kos" />
-          <InputText h2="Minimal Pembayaran" placeholder="Optional" />
+          <Text style={styles.h2}>Gender</Text>
+          <Picker
+            selectedValue={this.state.gender}
+            onValueChange={itemValue => {
+              this.changePicker("gender", itemValue);
+            }}
+          >
+            <Picker.Item label={"Putra"} value={"Putra"} />
+            <Picker.Item label={"Putri"} value={"Putri"} />
+            <Picker.Item label={"Campur"} value={"Campur"} />
+          </Picker>
+          <Text style={styles.h2}>Jangka Waktu</Text>
+          <Picker
+            selectedValue={this.state.duration}
+            onValueChange={itemValue => {
+              this.changePicker("duration", itemValue);
+            }}
+          >
+            <Picker.Item label={"1 bulan"} value={1} />
+            <Picker.Item label={"2 bulan"} value={2} />
+            <Picker.Item label={"3 bulan"} value={3} />
+            <Picker.Item label={"4 bulan"} value={4} />
+            <Picker.Item label={"5 bulan"} value={5} />
+            <Picker.Item label={"6 bulan"} value={6} />
+            <Picker.Item label={"7 bulan"} value={7} />
+            <Picker.Item label={"8 bulan"} value={8} />
+            <Picker.Item label={"9 bulan"} value={9} />
+            <Picker.Item label={"10 bulan"} value={10} />
+            <Picker.Item label={"11 bulan"} value={11} />
+            <Picker.Item label={"12 bulan"} value={12} />
+          </Picker>
           <View style={styles.inputContainer}>
             <Text style={styles.h2}>Fasilitas</Text>
             <View>
@@ -127,5 +162,4 @@ const styles = StyleSheet.create({
   btnSubmit: { flex: 1 }
 });
 
-//make this component available to the app
 export default Filter;

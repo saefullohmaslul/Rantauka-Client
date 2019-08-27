@@ -4,18 +4,18 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  FlatList
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Modal from "react-native-modal";
+import { connect } from "react-redux";
 
 import KosItem from "../../components/Kos/KosItem";
-import { FlatList } from "react-native-gesture-handler";
 import SearchInput from "../../components/Search/SearchInput";
 import { primaryColor } from "../../api/constans";
 import { getAllKostList } from "../../api/explore";
 
-import { connect } from "react-redux";
 import { getHouses } from "../../_actions/houses";
 
 const ModalComponent = props => (
@@ -25,40 +25,40 @@ const ModalComponent = props => (
       margin: 0
     }}
     isVisible={props.modalVisible}
+    onBackdropPress={() => props.setModalVisible(false)}
   >
     <View
       style={{
         backgroundColor: "#fff",
-        justifyContent: "flex-end",
-        paddingVertical: 10,
-        paddingHorizontal: 20
+        justifyContent: "flex-end"
       }}
     >
       <View
         style={{
-          borderBottomWidth: 1,
-          borderBottomColor: "#95a5a6",
+          backgroundColor: primaryColor,
           flexDirection: "row",
-          paddingBottom: 10
+          paddingVertical: 10,
+          paddingHorizontal: 15
         }}
       >
         <Text
           style={{
             fontSize: 17,
-            color: "#95a5a6",
+            color: "#fff",
             flex: 1,
             fontWeight: "500"
           }}
         >
-          Urutkan dari
+          Urutkan
         </Text>
         <Icon
+          style={{ color: "#fff" }}
           name="close"
           size={25}
           onPress={() => props.setModalVisible(false)}
         />
       </View>
-      <View>
+      <View style={{ paddingHorizontal: 15, paddingBottom: 5 }}>
         <Text
           style={{
             paddingVertical: 5,
@@ -136,7 +136,6 @@ class KosList extends Component {
         {this.props.houses.data ? (
           <FlatList
             style={{ height: height - 100 }}
-            // data={this.state.kostList.data}
             data={this.props.houses.data}
             extraData={this.props}
             renderItem={({ item, index }) => (

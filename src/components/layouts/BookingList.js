@@ -1,15 +1,21 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Icon } from "react-native";
-import { Card, Appbar } from "react-native-paper";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { Card } from "react-native-paper";
+import { connect } from "react-redux";
 import { HeaderBackButton } from "react-navigation";
+import AsyncStorage from "@react-native-community/async-storage";
+import { API_HOST } from "react-native-dotenv";
+
 import { primaryColor } from "../../api/constans";
+import { getOrders } from "../../_actions/order";
 
-export default class Bookinglist extends Component {
-  constructor(props) {
-    super(props);
+class Bookinglist extends Component {
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem("@token");
+    console.log(token);
+    await this.props.dispatch(getOrders(token));
+    console.log(this.props);
   }
-
-  componentDidMount() {}
 
   static navigationOptions = ({ navigation }) => {
     const handleBack = navigation.getParam("handleBack", () =>
@@ -24,66 +30,72 @@ export default class Bookinglist extends Component {
   };
 
   render() {
-    return (
-      <View>
-        <Card style={styles.container}>
-          <Card.Content style={{ paddingHorizontal: 0, paddingVertical: 0 }}>
-            <View style={{ flexDirection: "row" }}>
-              <View>
-                <Image
-                  source={{
-                    uri:
-                      "https://static.mamikos.com/uploads/cache/data/style/2018-12-05/MI1iyNrc-540x720.jpg"
-                  }}
-                  style={{
-                    width: 100,
-                    height: 120,
-                    borderTopLeftRadius: 5,
-                    borderBottomLeftRadius: 5
-                  }}
-                />
-              </View>
-              <View style={{ flex: 1, marginHorizontal: 5 }}>
-                <View style={{ marginVertical: 10 }}>
-                  <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-                    Permata Bintaro Residence
-                  </Text>
+    const { data } = this.props.orders;
+    return data ? (
+      <ScrollView>
+        {data.map(order => (
+          <Card key={order.id} style={styles.container}>
+            <Card.Content style={{ paddingHorizontal: 0, paddingVertical: 0 }}>
+              <View style={{ flexDirection: "row" }}>
+                <View style={styles.image}>
+                  <Image
+                    source={{
+                      uri: `${API_HOST}${order.house.images[0].uri}`
+                    }}
+                    style={{
+                      width: 100,
+                      height: 120,
+                      borderTopLeftRadius: 5,
+                      borderBottomLeftRadius: 5
+                    }}
+                  />
                 </View>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={{ marginRight: 15 }}>
-                    <Text>Booking</Text>
-                    <Text>Tanggal Booking</Text>
+                <View style={{ flex: 1, marginHorizontal: 5 }}>
+                  <View style={{ marginVertical: 10 }}>
+                    <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+                      {order.house.house_name}
+                    </Text>
                   </View>
-                  <View>
-                    <Text>Durasi Sewa</Text>
-                    <Text>1 bulan</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <View style={{ marginRight: 15 }}>
+                      <Text>Booking</Text>
+                      <Text>{order.checkIn.substring(0, 10)}</Text>
+                    </View>
+                    <View>
+                      <Text>Durasi Sewa</Text>
+                      <Text>{order.duration} bulan</Text>
+                    </View>
+                  </View>
+                  <View style={{ marginTop: 15 }}>
+                    <Text style={{ fontSize: 15, color: primaryColor }}>
+                      {order.status ? `Sukses` : `Tunggu Konfirmasi`}
+                    </Text>
                   </View>
                 </View>
-                <View style={{ marginTop: 15 }}>
-                  <Text style={{ fontSize: 15, color: primaryColor }}>
-                    Tunggu Konfirmasi
-                  </Text>
-                </View>
               </View>
-            </View>
-          </Card.Content>
-        </Card>
-      </View>
-    );
+            </Card.Content>
+          </Card>
+        ))}
+      </ScrollView>
+    ) : null;
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    orders: state.orders
+  };
+};
+
+export default connect(mapStateToProps)(Bookinglist);
 
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
-    marginVertical: 10,
-    shadowOffset: {
-      width: 0,
-      height: 4
-    },
-    shadowOpacity: 0.32,
-    shadowRadius: 5.46,
-    elevation: 9
+    marginVertical: 10
+  },
+  image: {
+    marginRight: 5
   },
   header: {
     backgroundColor: "#2980b9"

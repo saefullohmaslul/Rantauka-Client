@@ -14,7 +14,7 @@ class Filter extends Component {
             status={status}
             color={primaryColor}
           />
-          <Text>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
       </View>
     );
@@ -25,8 +25,10 @@ const styles = StyleSheet.create({
   fasilitasItem: {
     flexDirection: "row",
     alignItems: "center"
+  },
+  title: {
+    color: "#000"
   }
 });
 
-//make this component available to the app
 export default Filter;

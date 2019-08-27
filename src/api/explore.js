@@ -1,8 +1,5 @@
 import axios from "axios";
-
-const API_HOST = "http://192.168.1.28:5000";
-
-export const BASE_URL = "http://192.168.1.28:5000";
+import { API_HOST } from "react-native-dotenv";
 
 export const signupAccount = async data => {
   const response = await axios({
@@ -95,4 +92,36 @@ export const postKost = async (data, token) => {
   );
 
   return response;
+};
+
+export const getBooking = async (id, token) => {
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return await axios.get(`${API_HOST}/api/v1/booking/${id}`, config);
+};
+
+export const createBooking = async (data, token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return await axios.post(`${API_HOST}/api/v1/booking`, data, config);
+};
+
+export const getUser = async token => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return await axios.get(`${API_HOST}/api/v1/user`, config);
 };

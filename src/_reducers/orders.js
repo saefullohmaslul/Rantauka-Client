@@ -1,25 +1,23 @@
 const initialState = {
-  data: [],
+  data: undefined,
   isLoading: false
 };
 
-const houses = (state = initialState, actions) => {
+const orders = (state = initialState, actions) => {
   switch (actions.type) {
-    case "GET_HOUSES":
+    case "GET_ORDERS":
       return {
         ...state,
         data: actions.payload,
-        isLoading: false
+        isLoading: true
       };
-    case "GET_HOUSES_FULFILLED":
+    case "GET_ORDERS_FULFILLED":
       return {
-        ...state,
         data: actions.payload.data,
         isLoading: false
       };
-    case "GET_HOUSES_REJECTED":
+    case "GET_ORDERS_REJECTED":
       return {
-        ...state,
         error: "Error",
         isLoading: false
       };
@@ -28,4 +26,4 @@ const houses = (state = initialState, actions) => {
   }
 };
 
-export default houses;
+export default orders;

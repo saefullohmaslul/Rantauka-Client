@@ -12,10 +12,10 @@ class LoginPemilik extends Component {
       {
         userToken
           ? this.props.navigation.navigate("Ads")
-          : this.props.navigation.navigate("Guest");
+          : this.props.navigation.navigate("Login");
       }
     } catch (err) {
-      this.props.navigation.navigate("Guest");
+      this.props.navigation.navigate("Login");
     }
   };
 

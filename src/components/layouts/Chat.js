@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 
@@ -37,7 +36,6 @@ class Chat extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,5 +44,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//make this component available to the app
 export default Chat;

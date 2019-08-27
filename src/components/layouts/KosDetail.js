@@ -1,8 +1,6 @@
-//import liraries
 import React, { Component } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
   Share,
@@ -22,9 +20,6 @@ class KosDetail extends Component {
   constructor() {
     super();
     this.state = {
-      houses: {
-        nama: "MamiRooms Glow In Tipe B Kebayoran Baru Jakarta Selatan"
-      },
       interactionsComplete: false,
       kostList: undefined,
       user: undefined
@@ -88,10 +83,8 @@ class KosDetail extends Component {
   onShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          "React Native | A framework for building native apps using React"
+        message: "Yuk booking kos di Rantauka"
       });
-
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
@@ -133,9 +126,11 @@ class KosDetail extends Component {
         </View>
       );
     }
-    return <Text>Loading...</Text>;
+    return null;
   }
 }
+
+export default KosDetail;
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -149,5 +144,3 @@ const styles = StyleSheet.create({
   },
   shareWishlist: { flex: 1, justifyContent: "flex-end", flexDirection: "row" }
 });
-
-export default KosDetail;
