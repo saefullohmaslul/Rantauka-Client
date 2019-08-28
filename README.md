@@ -11,9 +11,7 @@ Rantauka is a useful application for finding the right lodging at an affordable 
 ## Screenshots
 
 <img src="https://res.cloudinary.com/hobikoding/image/upload/v1566956680/rantauka/photo_2019-08-28_08-42-38.jpg" width="200" height="350" alt="Rantauka Home"/>
-
 <img src="https://res.cloudinary.com/hobikoding/image/upload/v1566956680/rantauka/photo_2019-08-28_08-42-23.jpg" width="200" height="350" alt="Rantauka Profile"/>
-
 <img src="https://res.cloudinary.com/hobikoding/image/upload/v1566956680/rantauka/photo_2019-08-28_08-42-34.jpg" width="200" height="350" alt="Rantauka Iklan"/>
 <img src="https://res.cloudinary.com/hobikoding/image/upload/v1566956681/rantauka/photo_2019-08-28_08-42-31.jpg" width="200" height="350" alt="Rantauka List Kos"/>
 <img src="https://res.cloudinary.com/hobikoding/image/upload/v1566956680/rantauka/photo_2019-08-28_08-42-27.jpg" width="200" height="350" alt="Rantauka Detail Kos"/>
@@ -40,8 +38,8 @@ Rantauka is a useful application for finding the right lodging at an affordable 
 
 ## Prerequisites
 
-- Make sure You had been install NodeJs in your system [https://expressjs.com/](https://nodejs.org/)
-- Then install React Native [https://expressjs.com/](https://facebook.github.io/react-native/)
+- Make sure You had been install NodeJs in your system [https://nodejs.org/](https://nodejs.org/)
+- Then install React Native [https://facebook.github.io/react-native/](https://facebook.github.io/react-native/)
 - Dont forget express ad the backend [https://expressjs.com/](https://expressjs.com/)
 
 ## Installation & Configuration
