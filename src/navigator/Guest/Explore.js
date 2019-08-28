@@ -4,7 +4,8 @@ import {
   KosDetail,
   KosList,
   Login,
-  Register
+  Register,
+  Filter
 } from "../../components/layouts";
 import { primaryColor } from "../../api/constans";
 
@@ -33,6 +34,9 @@ const ExploreNavigation = createStackNavigator(
     },
     Login: {
       screen: Login
+    },
+    Filter: {
+      screen: Filter
     }
   },
   {

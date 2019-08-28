@@ -53,10 +53,6 @@ class Filter extends Component {
     });
   };
 
-  handleIconRight = () => {
-    this.props.navigation.goBack();
-  };
-
   changePicker = (state, value) => {
     this.setState({
       [state]: value

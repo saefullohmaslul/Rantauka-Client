@@ -27,12 +27,6 @@ const ExploreNavigation = createStackNavigator(
         header: null
       }
     },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        header: null
-      }
-    },
     Ads: {
       screen: Iklan
     },
