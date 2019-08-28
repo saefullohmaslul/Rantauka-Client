@@ -19,7 +19,7 @@ class KosView extends Component {
                 key={id}
                 style={[styles.image, { width: width }]}
                 source={{
-                  uri: `${API_HOST}${image.uri}`
+                  uri: `${API_HOST}/${image.uri}`
                 }}
               />
             );

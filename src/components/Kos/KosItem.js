@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import { API_HOST } from "react-native-dotenv";
+import { API_HOST, API_HOST_IMAGE } from "react-native-dotenv";
 
 import changePrice from "../../utils/changePrice";
 
 class KosItem extends Component {
   render() {
-    console.log(`${API_HOST}${this.props.data.images[0].uri}`);
     return (
       <View style={styles.container}>
         <Image
           source={{
-            uri: `${API_HOST}${this.props.data.images[0].uri}`
+            uri: `${API_HOST}/${this.props.data.images[0].uri}`
           }}
           style={styles.image}
         />

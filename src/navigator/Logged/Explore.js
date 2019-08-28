@@ -8,7 +8,8 @@ import {
   BookingList,
   BookingDuration,
   Iklan,
-  Filter
+  Filter,
+  Profile
 } from "../../components/layouts";
 import { primaryColor } from "../../api/constans";
 
@@ -27,7 +28,7 @@ const ExploreNavigation = createStackNavigator(
       }
     },
     Profile: {
-      screen: KosList,
+      screen: Profile,
       navigationOptions: {
         header: null
       }

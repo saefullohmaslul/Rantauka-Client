@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../api/explore";
+import { API_HOST } from "react-native-dotenv";
 
 export const getOrders = token => {
   const config = {
@@ -11,6 +11,6 @@ export const getOrders = token => {
   };
   return {
     type: "GET_ORDERS",
-    payload: axios.get(`${BASE_URL}/api/v1/bookings`, config)
+    payload: axios.get(`${API_HOST}/api/v1/bookings`, config)
   };
 };

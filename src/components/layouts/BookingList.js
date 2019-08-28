@@ -12,9 +12,7 @@ import { getOrders } from "../../_actions/order";
 class Bookinglist extends Component {
   async componentDidMount() {
     const token = await AsyncStorage.getItem("@token");
-    console.log(token);
     await this.props.dispatch(getOrders(token));
-    console.log(this.props);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -40,7 +38,7 @@ class Bookinglist extends Component {
                 <View style={styles.image}>
                   <Image
                     source={{
-                      uri: `${API_HOST}${order.house.images[0].uri}`
+                      uri: `${API_HOST}/${order.house.images[0].uri}`
                     }}
                     style={{
                       width: 100,

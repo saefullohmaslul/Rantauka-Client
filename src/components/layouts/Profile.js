@@ -39,7 +39,11 @@ class Profile extends Component {
           <ProdukMenuItem
             icon="ios-bookmarks"
             nama="Booking List"
-            handlePress={() => this.props.navigation.navigate("BookingList")}
+            handlePress={() =>
+              this.props.navigation.navigate("BookingList", {
+                handleBack: () => this.props.navigation.navigate("Index")
+              })
+            }
           />
           <ProdukMenuItem icon="ios-home" nama="Barang dan Jasa" />
           <ProdukMenuItem icon="ios-key" nama="Verifikasi Akun" />

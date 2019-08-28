@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import { primaryColor, bgColor } from "../../api/constans";
 import { getBooking } from "../../_actions/booking";
 import changePrice from "../../utils/changePrice";
+import { createBooking } from "../../api/explore";
 
 const { width } = Dimensions.get("screen");
 class Booking extends Component {
@@ -44,8 +45,7 @@ class Booking extends Component {
       duration: this.props.booking.duration,
       houseId: this.props.booking.data.house.id
     };
-    const response = await createBooking(data, token);
-    console.log(response);
+    await createBooking(data, token);
     this.props.navigation.navigate("BookingList", {
       handleBack: () => this.props.navigation.navigate("Index")
     });
@@ -93,7 +93,7 @@ class Booking extends Component {
               <View style={{ alignItems: "flex-start", marginRight: 15 }}>
                 <Image
                   source={{
-                    uri: `${API_HOST}${data.house.images[0].uri}`
+                    uri: `${API_HOST}/${data.house.images[0].uri}`
                   }}
                   style={{ width: 100, height: 100 }}
                 />
