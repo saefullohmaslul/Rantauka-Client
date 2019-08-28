@@ -1,10 +1,8 @@
-//import liraries
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-// create a component
 class ProdukMenuItem extends Component {
   render() {
     const { icon, nama } = this.props;
@@ -24,7 +22,6 @@ class ProdukMenuItem extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     margin: 20,
@@ -45,5 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//make this component available to the app
 export default ProdukMenuItem;

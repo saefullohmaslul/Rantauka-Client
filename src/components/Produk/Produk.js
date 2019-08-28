@@ -1,10 +1,8 @@
-//import liraries
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-// create a component
 class Produk extends Component {
   render() {
     return (
@@ -33,7 +31,6 @@ class Produk extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     padding: 20,

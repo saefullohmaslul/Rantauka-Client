@@ -4,6 +4,7 @@ const primaryColor = "#2980b9";
 const secondaryColor = "#3498db";
 const thirdColor = "#bdc3c7";
 const bgColor = "#f6f8f8";
+const textColor = "#535c68";
 
 const theme = {
   ...DefaultTheme,
@@ -15,4 +16,4 @@ const theme = {
   }
 };
 
-export { theme, bgColor, primaryColor, secondaryColor, thirdColor };
+export { theme, bgColor, primaryColor, secondaryColor, thirdColor, textColor };

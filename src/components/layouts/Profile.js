@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator
+} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import Produk from "../../components/Produk/Produk";
 import ProdukMenuItem from "../../components/Produk/ProdukMenuItem";
-import { bgColor } from "../../api/constans";
+import { bgColor, primaryColor } from "../../api/constans";
 import { getUser } from "../../api/explore";
 
 class Profile extends Component {
@@ -61,7 +67,11 @@ class Profile extends Component {
           <ProdukMenuItem icon="ios-list" nama="Syarat dan Ketentuan" />
         </View>
       </ScrollView>
-    ) : null;
+    ) : (
+      <View style={styles.loading}>
+        <ActivityIndicator color={primaryColor} size={50} />
+      </View>
+    );
   }
 }
 
@@ -94,6 +104,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: "#fff"
+  },
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

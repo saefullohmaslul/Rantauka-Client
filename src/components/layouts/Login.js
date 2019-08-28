@@ -1,9 +1,22 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  ActivityIndicator
+} from "react-native";
 import { Button } from "react-native-paper";
 import AsyncStorage from "@react-native-community/async-storage";
+import Icons from "react-native-vector-icons/Ionicons";
+import IconsMaterial from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { loginAccount } from "../../api/explore";
+import { textColor, primaryColor } from "../../api/constans";
+import { isEmail, isValidPassword } from "../../utils/helper";
 
 class Login extends Component {
   constructor() {
@@ -12,7 +25,13 @@ class Login extends Component {
       login: {
         email: "",
         password: ""
-      }
+      },
+      showPassword: false,
+      validation: {
+        email: false,
+        password: false
+      },
+      isLoading: false
     };
   }
 
@@ -25,62 +44,136 @@ class Login extends Component {
     }));
   };
 
+  validation = (state, value) => {
+    let result;
+    if (state === "email") {
+      result = isEmail(value);
+    } else if (state === "password") {
+      result = isValidPassword(value);
+    }
+
+    if (!result) {
+      this.setState({
+        validation: {
+          ...this.state.validation,
+          [state]: true
+        }
+      });
+    } else {
+      this.setState({
+        validation: {
+          ...this.state.validation,
+          [state]: false
+        }
+      });
+    }
+  };
+
   handleLogin = async data => {
+    this.setState({
+      isLoading: true
+    });
     try {
       const response = await loginAccount(data);
       if (response) {
-        await AsyncStorage.setItem("@isLogin", "true");
         await AsyncStorage.setItem("@token", response.data.token);
         this.props.navigation.navigate("Logged");
       }
     } catch (err) {
-      console.log(err);
+      this.setState({
+        isLoading: false
+      });
+      alert(err);
     }
+  };
+
+  showPassword = () => {
+    this.setState({ showPassword: !this.state.showPassword });
   };
 
   render() {
     const { replace } = this.props.navigation;
-
+    const { validation, isLoading } = this.state;
+    const { email, password } = this.state.login;
     return (
-      <View style={styles.container}>
-        <View style={styles.textContainer}>
-          <TextInput
-            style={styles.text}
-            placeholderTextColor="#6eb5e5"
-            placeholder="Email"
-            returnKeyType="next"
-            keyboardType="default"
-            onChangeText={text => this.handleChange(text, "email")}
-            value={this.state.login.email}
-          />
-          <TextInput
-            style={styles.text}
-            placeholderTextColor="#6eb5e5"
-            placeholder="Password"
-            returnKeyType="next"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => this.handleChange(text, "password")}
-            value={this.state.login.password}
-          />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flex: 1 }}
+      >
+        <KeyboardAvoidingView
+          behavior={"padding"}
+          style={styles.container}
+          enabled
+        >
+          <View style={styles.textContainer}>
+            <View style={styles.registerContainer}>
+              <Icons style={styles.icon} name={"md-rocket"} size={70} />
+            </View>
+            <TextInput
+              style={styles.text}
+              placeholder="Email"
+              returnKeyType="next"
+              keyboardType="default"
+              returnKeyType="next"
+              onSubmitEditing={() => this.password.focus()}
+              onChangeText={text => this.handleChange(text, "email")}
+              value={email}
+              onBlur={() => this.validation("email", email)}
+            />
+            {validation.email ? (
+              <Text style={styles.error}>Please enter valid email</Text>
+            ) : null}
+            <View style={styles.password}>
+              <TextInput
+                style={{ flex: 1, color: textColor }}
+                placeholder="Password"
+                returnKeyType="next"
+                keyboardType="default"
+                returnKeyType="go"
+                ref={input => {
+                  this.password = input;
+                }}
+                onSubmitEditing={() => this.handleLogin(this.state.login)}
+                secureTextEntry={!this.state.showPassword}
+                onChangeText={text => this.handleChange(text, "password")}
+                value={password}
+                onBlur={() => this.validation("password", password)}
+              />
+              <TouchableOpacity onPress={this.showPassword}>
+                <IconsMaterial
+                  name={this.state.showPassword ? "eye-off" : "eye"}
+                  size={25}
+                  style={styles.passwordIcon}
+                />
+              </TouchableOpacity>
+            </View>
+            {validation.password ? (
+              <Text style={styles.error}>Please enter valid password</Text>
+            ) : null}
 
-          <Button
-            style={styles.button}
-            mode="contained"
-            onPress={() => this.handleLogin(this.state.login)}
-          >
-            Login
-          </Button>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.info}>
-            Don't have an account?{" "}
-            <Text onPress={() => replace("Register")} style={styles.signup}>
-              Signup here
-            </Text>
-          </Text>
-        </View>
-      </View>
+            {isLoading ? (
+              <ActivityIndicator color={primaryColor} size={30} />
+            ) : (
+              <Button
+                style={styles.button}
+                mode="contained"
+                onPress={() => this.handleLogin(this.state.login)}
+              >
+                Login
+              </Button>
+            )}
+
+            <View style={styles.infoContainer}>
+              <Text style={styles.info}>
+                Don't have an account?{" "}
+                <Text onPress={() => replace("Register")} style={styles.signup}>
+                  Signup here
+                </Text>
+              </Text>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }
@@ -90,12 +183,19 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 40
+    justifyContent: "center",
+    paddingHorizontal: 40,
+    marginBottom: 20
+  },
+  registerContainer: {
+    paddingBottom: 20,
+    alignItems: "center"
+  },
+  icon: {
+    color: primaryColor
   },
   textContainer: {
-    height: 20,
-    justifyContent: "center",
-    flexGrow: 1
+    justifyContent: "center"
   },
   infoContainer: {
     alignItems: "center",
@@ -113,14 +213,26 @@ const styles = StyleSheet.create({
     backgroundColor: "#2980b9"
   },
   text: {
+    color: textColor,
     borderColor: "#3498db",
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-    color: "#3498db"
+    borderBottomWidth: 0.5,
+    marginBottom: 10
+  },
+  passwordIcon: {
+    paddingBottom: 12
   },
   signup: {
     color: "#2980b9"
+  },
+  password: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#3498db",
+    borderBottomWidth: 0.5,
+    marginBottom: 10
+  },
+  error: {
+    color: "#eb4d4b",
+    marginLeft: 4
   }
 });

@@ -1,12 +1,6 @@
 import { createStackNavigator } from "react-navigation";
 
-import {
-  Login,
-  Register,
-  KosList,
-  KosDetail,
-  AuthRoot
-} from "../../components/layouts";
+import { AuthRoot } from "../../components/layouts";
 import MenuNavigator from "./Menu";
 import { primaryColor } from "../../api/constans";
 

@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from "react";
 import {
   View,
@@ -10,7 +9,6 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { withNavigation } from "react-navigation";
 
-// create a component
 class Search extends Component {
   render() {
     console.log(this.props.navigation.navigate);
@@ -41,7 +39,6 @@ class Search extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   inputContainer: {
     paddingHorizontal: 13,

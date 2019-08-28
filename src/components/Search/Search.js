@@ -1,12 +1,9 @@
-//import liraries
 import React, { Component } from "react";
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Card, Title } from "react-native-paper";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 import SearchInput from "./SearchInput";
 
-// create a component
 class Search extends Component {
   render() {
     return (
@@ -16,7 +13,7 @@ class Search extends Component {
             <Title style={styles.searchText}>Mau cari kos dimana?</Title>
             <SearchInput
               onFocus={() =>
-                this.props.navigation.navigate("KosList", {
+                this.props.navigation.navigate("HomeList", {
                   autoFocus: true
                 })
               }
@@ -31,7 +28,6 @@ class Search extends Component {
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
