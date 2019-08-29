@@ -1,12 +1,42 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { connect } from "react-redux";
+import AsyncStorage from "@react-native-community/async-storage";
 
-// create a component
+import { primaryColor } from "../../api/constans";
+import { createWistlist } from "../../api/explore";
+
 class KosDescription extends Component {
+  state = {
+    heart: "heart-outline"
+  };
+
+  onWishlist = async () => {
+    const token = await AsyncStorage.getItem("@token");
+    const data = {
+      houseId: this.props.kostList.id
+    };
+    if (token) {
+      await createWistlist(data, token);
+      this.state.heart === "heart"
+        ? this.setState({
+            heart: "heart-outline"
+          })
+        : this.setState({ heart: "heart" });
+    } else {
+      this.props.navigation.navigate("Login");
+    }
+  };
+
   render() {
-    console.log(this.props.kostList);
     const kostList = this.props.kostList;
     return (
       <View style={styles.container}>
@@ -17,6 +47,15 @@ class KosDescription extends Component {
             <Text style={styles.luasKamar}>
               {kostList.house_length} x {kostList.house_width} m
             </Text>
+            <TouchableOpacity onPress={this.onWishlist}>
+              <Icon
+                name={this.state.heart}
+                size={30}
+                style={{
+                  color: this.state.heart === "heart" ? "#eb4d4b" : primaryColor
+                }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.luasContainer}>
@@ -72,7 +111,14 @@ class KosDescription extends Component {
   }
 }
 
-// define your styles
+const mapStateToProps = state => {
+  return {
+    houses: state.houses
+  };
+};
+
+export default connect(mapStateToProps)(KosDescription);
+
 const styles = StyleSheet.create({
   container: {},
   luasTitle: {},
@@ -88,7 +134,8 @@ const styles = StyleSheet.create({
   luasKamar: {
     marginLeft: 10,
     fontSize: 15,
-    color: "#2c3e50"
+    color: "#2c3e50",
+    flex: 1
   },
   title: {
     color: "#2c3e50",
@@ -158,6 +205,3 @@ const styles = StyleSheet.create({
     color: "#2980b9"
   }
 });
-
-//make this component available to the app
-export default KosDescription;

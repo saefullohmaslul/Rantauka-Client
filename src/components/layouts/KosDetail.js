@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  InteractionManager
+  ActivityIndicator
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -20,9 +20,9 @@ class KosDetail extends Component {
   constructor() {
     super();
     this.state = {
-      interactionsComplete: false,
       kostList: undefined,
-      user: undefined
+      user: undefined,
+      heart: "heart-outline"
     };
     this.scrollY = new Animated.Value(0);
   }
@@ -35,14 +35,10 @@ class KosDetail extends Component {
         kostList
       });
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
-
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ interactionsComplete: true });
-    });
-    this.props.navigation.setParams({ handleShare: this.onShare });
     this.props.navigation.setParams({
+      handleShare: this.onShare,
       bgColor: this.scrollY.interpolate({
         inputRange: [0, Dimensions.get("window").height / 2 - 40],
         outputRange: ["transparent", primaryColor],
@@ -53,7 +49,6 @@ class KosDetail extends Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
-
     return {
       headerRight: (
         <TouchableOpacity onPress={() => params.handleShare()}>
@@ -99,10 +94,6 @@ class KosDetail extends Component {
     }
   };
 
-  handleIconLeft = () => {
-    this.props.navigation.navigate("Kos");
-  };
-
   render() {
     if ((kostList = this.state.kostList)) {
       return (
@@ -126,7 +117,11 @@ class KosDetail extends Component {
         </View>
       );
     }
-    return null;
+    return (
+      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
+        <ActivityIndicator color={primaryColor} size={50} />
+      </View>
+    );
   }
 }
 

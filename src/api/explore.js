@@ -125,3 +125,44 @@ export const getUser = async token => {
   };
   return await axios.get(`${API_HOST}/api/v1/user`, config);
 };
+
+export const createWistlist = async (data, token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  return await axios.post(`${API_HOST}/api/v1/wishlist`, data, config);
+};
+
+export const getWishlists = async token => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return await axios.get(`${API_HOST}/api/v1/wishlists`, config);
+};
+
+export const deleteWishlist = async (id, token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return await axios.delete(`${API_HOST}/api/v1/wishlist/${id}`, config);
+};
+
+export const getToken = async token => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  };
+  return await axios.get(`${API_HOST}/api/v1/userToken`, config);
+};

@@ -35,11 +35,11 @@ class Login extends Component {
     };
   }
 
-  handleChange = (text, name) => {
+  handleChange = (text, state) => {
     this.setState(prevState => ({
       login: {
-        ...prevState.login,
-        [name]: text
+        ...this.state.login,
+        [state]: text
       }
     }));
   };

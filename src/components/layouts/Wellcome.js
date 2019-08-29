@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Icons from "react-native-vector-icons/Ionicons";
 
 import { primaryColor } from "../../api/constans";
+import { getToken } from "../../api/explore";
 
 export default class Wellcome extends Component {
   constructor() {
@@ -18,9 +19,20 @@ export default class Wellcome extends Component {
   }
 
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem("@token");
-
-    this.props.navigation.navigate(userToken ? "Logged" : "Guest");
+    try {
+      let userToken = await AsyncStorage.getItem("@token");
+      if (userToken) {
+        const response = await getToken(userToken);
+        userToken = response.data.token;
+        await AsyncStorage.setItem("@token", userToken);
+        this.props.navigation.navigate("Logged");
+      } else {
+        this.props.navigation.navigate("Guest");
+      }
+    } catch (err) {
+      await AsyncStorage.clear();
+      this.props.navigation.navigate("Guest");
+    }
   };
 
   render() {

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { View, ScrollView, StyleSheet, StatusBar } from "react-native";
 
 import SearchComponent from "../Search/Search";
 import PromoComponent from "../Promo/Promo";
 import PasangIklan from "../Iklan/PasangIklan";
 import KotaPopuler from "../KotaPopuler/KotaPopuler";
-import { bgColor } from "../../api/constans";
+import { bgColor, primaryColor } from "../../api/constans";
 
 class Home extends Component {
   constructor() {
@@ -27,6 +26,7 @@ class Home extends Component {
     const { promoImage } = this.state;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <StatusBar backgroundColor={primaryColor} />
         <SearchComponent navigation={this.props.navigation} />
         <View style={styles.separator} />
         <PromoComponent promoImage={promoImage} />

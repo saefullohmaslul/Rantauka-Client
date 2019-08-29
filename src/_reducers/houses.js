@@ -1,6 +1,6 @@
 const initialState = {
   data: [],
-  isLoading: false
+  isLoading: true
 };
 
 const houses = (state = initialState, actions) => {
@@ -9,7 +9,7 @@ const houses = (state = initialState, actions) => {
       return {
         ...state,
         data: actions.payload,
-        isLoading: false
+        isLoading: true
       };
     case "GET_HOUSES_FULFILLED":
       return {

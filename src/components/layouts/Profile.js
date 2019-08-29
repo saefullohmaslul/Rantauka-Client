@@ -24,8 +24,13 @@ class Profile extends Component {
 
   async componentDidMount() {
     const token = await AsyncStorage.getItem("@token");
-    const response = await getUser(token);
-    this.setState({ user: response.data });
+    try {
+      const response = await getUser(token);
+      this.setState({ user: response.data });
+    } catch (err) {
+      AsyncStorage.clear();
+      this.props.navigation.navigate("AuthRoot");
+    }
   }
 
   render() {

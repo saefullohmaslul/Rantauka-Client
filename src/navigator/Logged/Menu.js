@@ -6,6 +6,7 @@ import ProfileNavigator from "./Profile";
 import ExploreNavigator from "./Explore";
 import WishlistNavigator from "./Wishlist";
 import ChatNavigator from "./Chat";
+import { primaryColor } from "../../api/constans";
 
 const MenuNavigator = createBottomTabNavigator(
   {
@@ -45,7 +46,10 @@ const MenuNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Explore"
+    initialRouteName: "Explore",
+    tabBarOptions: {
+      activeTintColor: primaryColor
+    }
   }
 );
 

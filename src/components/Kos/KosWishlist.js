@@ -1,64 +1,19 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { API_HOST } from "react-native-dotenv";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import AsyncStorage from "@react-native-community/async-storage";
 
 import changePrice from "../../utils/changePrice";
-import { primaryColor } from "../../api/constans";
-import { deleteWishlist } from "../../api/explore";
 
 class KosItem extends Component {
-  state = {
-    heart: "heart"
-  };
-
-  onWishlist = async () => {
-    const token = await AsyncStorage.getItem("@token");
-    if (token) {
-      await deleteWishlist(this.props.wishlistId, token);
-      this.setState({
-        heart: undefined
-      });
-    } else {
-      this.props.navigation.navigate("Login");
-    }
-  };
-
   render() {
     return (
       <View style={styles.container}>
-        {this.props.wishlist ? (
-          <View>
-            <Image
-              source={{
-                uri: `${API_HOST}/${this.props.data.images[0].uri}`
-              }}
-              style={styles.image}
-            />
-            {this.state.heart ? (
-              <View style={styles.wishlist}>
-                <TouchableOpacity onPress={this.onWishlist}>
-                  <Icon
-                    name={this.state.heart}
-                    size={30}
-                    style={{
-                      color:
-                        this.state.heart === "heart" ? "#eb4d4b" : primaryColor
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-            ) : null}
-          </View>
-        ) : (
-          <Image
-            source={{
-              uri: `${API_HOST}/${this.props.data.images[0].uri}`
-            }}
-            style={styles.image}
-          />
-        )}
+        <Image
+          source={{
+            uri: `${API_HOST}/${this.props.data.images[0].uri}`
+          }}
+          style={styles.image}
+        />
         <View style={styles.textContainer}>
           <View style={styles.descriptionContainer}>
             <Text style={styles.jenis}>{this.props.data.house_type}</Text>
@@ -151,9 +106,5 @@ const styles = StyleSheet.create({
     color: "#2d3436",
     fontSize: 18,
     fontWeight: "400"
-  },
-  wishlist: {
-    position: "absolute",
-    right: 20
   }
 });

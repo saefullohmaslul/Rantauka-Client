@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  FlatList
+  FlatList,
+  ActivityIndicator
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Modal from "react-native-modal";
@@ -116,70 +117,95 @@ class KosList extends Component {
   render() {
     const { height } = Dimensions.get("window");
     const autoFocus = this.props.navigation.getParam("autoFocus", false);
-    return (
-      <View style={styles.container}>
-        <SearchInput
-          handleGoBack={this.handleGoBack}
-          icon="ios-arrow-round-back"
-          size={35}
-          margin={17}
-          autoFocus={autoFocus}
-        />
-        {this.props.houses.data ? (
-          <FlatList
-            style={{ height: height - 100 }}
-            data={this.props.houses.data}
-            extraData={this.props}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate("HomeDetail", {
-                    kostList: item.id
-                  })
-                }
-              >
-                <KosItem
-                  data={item}
-                  id={index + 1}
-                  max={this.findIndex(this.props.houses.data)}
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.id.toString()}
-            showsVerticalScrollIndicator={false}
-          />
-        ) : null}
-        <View style={styles.filterUrutkan}>
-          <Icon
-            style={[styles.iconFilter, { color: primaryColor }]}
-            name="filter-variant"
-            size={15}
-          />
-          <Text
-            style={styles.buttonTextFilter}
-            onPress={() => this.props.navigation.navigate("Filter")}
-          >
-            Filter
-          </Text>
-          <ModalComponent
-            setModalVisible={this.setModalVisible}
-            modalVisible={this.state.modalVisible}
-          />
-
-          <Icon
-            style={[styles.iconUrutkan, { color: primaryColor }]}
-            name="sort-variant"
-            size={15}
-          />
-          <Text
-            style={styles.buttonTextUrutkan}
-            onPress={() => this.setModalVisible(true)}
-          >
-            Urutkan
-          </Text>
+    if (this.props.houses.isLoading) {
+      return (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator color={primaryColor} size={50} />
         </View>
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <SearchInput
+            handleGoBack={this.handleGoBack}
+            icon="ios-arrow-round-back"
+            size={35}
+            margin={17}
+            autoFocus={autoFocus}
+          />
+          {this.props.houses.data.length > 0 ? (
+            <FlatList
+              style={{ height: height - 100 }}
+              data={this.props.houses.data}
+              extraData={this.props}
+              renderItem={({ item, index }) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate("HomeDetail", {
+                      kostList: item.id
+                    })
+                  }
+                >
+                  <KosItem
+                    data={item}
+                    id={index + 1}
+                    max={this.findIndex(this.props.houses.data)}
+                  />
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.id.toString()}
+              showsVerticalScrollIndicator={false}
+            />
+          ) : (
+            <View
+              style={{
+                height: height - 100
+              }}
+            >
+              <View style={styles.houseEmpty}>
+                <Icon
+                  name="home-alert"
+                  size={100}
+                  style={{ color: primaryColor }}
+                />
+                <Text style={styles.info}>Kos masih kosong</Text>
+              </View>
+            </View>
+          )}
+          <View style={styles.filterUrutkan}>
+            <Icon
+              style={[styles.iconFilter, { color: primaryColor }]}
+              name="filter-variant"
+              size={15}
+            />
+            <Text
+              style={styles.buttonTextFilter}
+              onPress={() => this.props.navigation.navigate("Filter")}
+            >
+              Filter
+            </Text>
+            <ModalComponent
+              setModalVisible={this.setModalVisible}
+              modalVisible={this.state.modalVisible}
+            />
+
+            <Icon
+              style={[styles.iconUrutkan, { color: primaryColor }]}
+              name="sort-variant"
+              size={15}
+            />
+            <Text
+              style={styles.buttonTextUrutkan}
+              onPress={() => this.setModalVisible(true)}
+            >
+              Urutkan
+            </Text>
+          </View>
+        </View>
+      );
+    }
   }
 }
 
@@ -238,5 +264,11 @@ const styles = StyleSheet.create({
   iconFilter: {
     marginRight: 3
   },
-  iconUrutkan: { marginLeft: 3 }
+  iconUrutkan: { marginLeft: 3 },
+  houseEmpty: {
+    marginBottom: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1
+  }
 });

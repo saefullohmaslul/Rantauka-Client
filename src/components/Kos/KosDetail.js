@@ -33,7 +33,6 @@ class KosDetail extends Component {
   };
 
   render() {
-    console.log("hai" + this.props.kostList);
     const kostList = this.props.kostList;
     const { displayFoto, displayMaps } = this.state;
     return (

@@ -5,7 +5,9 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
+  Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -20,7 +22,9 @@ import IklanJenisKost from "../../components/Iklan/IklanJenisKost";
 import IklanDeskripsi from "../../components/Iklan/IklanDeskripsi";
 import { postKost } from "../../api/explore";
 import IklanFasilitas from "../../components/Iklan/IklanFasilitas";
+import { primaryColor } from "../../api/constans";
 
+const { width } = Dimensions.get("screen");
 class Iklan extends Component {
   constructor() {
     super();
@@ -50,7 +54,8 @@ class Iklan extends Component {
         deskripsiKost: "",
         hargaKost: undefined,
         booking: false
-      }
+      },
+      isLoading: false
     };
   }
 
@@ -145,6 +150,9 @@ class Iklan extends Component {
   };
 
   onSubmit = async () => {
+    this.setState({
+      isLoading: true
+    });
     try {
       const { goBack } = this.props.navigation;
       const token = await AsyncStorage.getItem("@token");
@@ -156,12 +164,12 @@ class Iklan extends Component {
         }
       });
       const response = await postKost(this.state.kost, token);
-      console.log(response);
       if (response) {
         goBack();
       }
     } catch (err) {
-      console.log(err);
+      this.setState({ isLoading: false });
+      alert(err);
     }
   };
 
@@ -276,10 +284,16 @@ class Iklan extends Component {
             onChange={foto => this.changeKost("fotoKost", foto)}
           />
         </ScrollView>
-        <SubmitBottom
-          title="Pasang Iklan"
-          onPress={() => this.onSubmit(this.state.kost)}
-        />
+        {this.state.isLoading ? (
+          <View style={styles.loading}>
+            <ActivityIndicator color={primaryColor} size={30} />
+          </View>
+        ) : (
+          <SubmitBottom
+            title="Pasang Iklan"
+            onPress={() => this.onSubmit(this.state.kost)}
+          />
+        )}
       </View>
     );
   }
@@ -344,6 +358,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontSize: 16,
     fontWeight: "500"
+  },
+  loading: {
+    padding: 12,
+    position: "absolute",
+    bottom: 0,
+    alignItems: "center",
+    width: width
   }
 });
 
